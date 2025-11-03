@@ -1,0 +1,21 @@
+// 颜色变量
+$primary-color: #1e40af;
+$secondary-color: #dc2626;
+$text-dark: #1f2937;
+$text-light: #ffffff;
+$bg-overlay: rgba(0, 0, 0, 0.4);
+
+// 尺寸变量
+$mobile-max-width: 750px;
+$section-padding: 40px 20px;
+
+// 动画时长
+$transition-fast: 0.3s;
+$transition-normal: 0.6s;
+$transition-slow: 1s;
+
+// Z-index 层级
+$z-loading: 9999;
+$z-modal: 1000;
+$z-header: 100;
+$z-content: 10;
