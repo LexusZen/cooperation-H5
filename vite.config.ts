@@ -23,6 +23,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true
+    host: '0.0.0.0', // 允许局域网访问
+    open: true,
+    strictPort: false, // 端口被占用时自动尝试下一个可用端口
   }
 })
