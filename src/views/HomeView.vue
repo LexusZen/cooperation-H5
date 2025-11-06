@@ -91,9 +91,7 @@ import Section6 from './Section6.vue'
 import InterviewCard from '@/components/InterviewCard.vue'
 import TopBar from '@/components/TopBar.vue'
 
-// 导入 Swiper 样式
-import 'swiper/css'
-import 'swiper/css/pagination'
+// Swiper 12+ 不需要单独导入CSS
 
 const modules = [Pagination]
 

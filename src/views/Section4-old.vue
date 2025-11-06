@@ -75,8 +75,7 @@ import { Autoplay, Pagination } from 'swiper/modules'
 import { useAnimation } from '@/composables/useAnimation'
 import { useIntersection } from '@/composables/useIntersection'
 
-import 'swiper/css'
-import 'swiper/css/pagination'
+// Swiper 12+ 不需要单独导入CSS
 
 const sectionRef = ref<HTMLElement | null>(null)
 const { fadeInUp, createTimeline } = useAnimation()

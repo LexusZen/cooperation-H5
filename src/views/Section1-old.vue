@@ -61,14 +61,10 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination, EffectCoverflow } from 'swiper/modules'
 import { useAnimation } from '@/composables/useAnimation'
 
-// 导入 Swiper 样式
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/effect-coverflow'
+// Swiper 12+ 不需要单独导入CSS
 
 const sectionRef = ref<HTMLElement | null>(null)
-const numberRefs = ref<HTMLElement[]>([])
-const { fadeIn, fadeInUp, animateNumber, createTimeline } = useAnimation()
+const { fadeIn, fadeInUp, createTimeline } = useAnimation()
 
 const carouselModules = [Autoplay, Pagination, EffectCoverflow]
 

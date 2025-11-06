@@ -82,8 +82,7 @@ import { useIntersection } from '@/composables/useIntersection'
 import { useTypewriter } from '@/composables/useTypewriter'
 import { useAnimation } from '@/composables/useAnimation'
 
-import 'swiper/css'
-import 'swiper/css/pagination'
+// Swiper 12+ 不需要单独导入CSS
 
 const sectionRef = ref<HTMLElement | null>(null)
 const activeInfo = ref<any>(null)

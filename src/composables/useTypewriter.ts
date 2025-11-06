@@ -70,6 +70,8 @@ export function useTypewriter() {
       }
 
       const line = lines[currentLineIndex]
+      if (!line) return // 防止undefined
+
       const lineIndex = currentLineIndex
 
       typeText(

@@ -30,7 +30,7 @@
                     v-for="(item, barIndex) in module.data"
                     :key="item.year"
                     class="bar-item"
-                    :class="{ 'bar-visible': visibleBars[moduleIndex] >= barIndex }"
+                    :class="{ 'bar-visible': (visibleBars[moduleIndex] ?? -1) >= barIndex }"
                     @click="showBarDetail(item, module)"
                   >
                     <!-- 柱子 -->
@@ -269,7 +269,10 @@ useIntersection(sectionRef, () => {
 
 // 柱子逐条动画
 const animateBars = (moduleIndex: number) => {
-  chartModules[moduleIndex].data.forEach((_, barIndex) => {
+  const module = chartModules[moduleIndex]
+  if (!module) return
+
+  module.data.forEach((_, barIndex) => {
     setTimeout(() => {
       visibleBars.value[moduleIndex] = barIndex
     }, barIndex * 400) // 每条柱子间隔400ms

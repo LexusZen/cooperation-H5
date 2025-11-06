@@ -4,7 +4,7 @@
     <transition name="fade">
       <div v-if="currentStage === 1" class="welcome-screen">
         <div class="welcome-content">
-          <h1 class="welcome-title">深汕特别合作区</h1>
+          <h1 class="welcome-title">深汕焕新 奋战百千万</h1>
           <p class="welcome-subtitle">Shenzhen-Shanwei Special Cooperation Zone</p>
           <div class="loading-bar">
             <div class="loading-progress" :style="{ width: loadingProgress + '%' }"></div>
@@ -20,7 +20,7 @@
         <div class="panorama-image" :style="{ backgroundImage: 'url(/images/section1/bg-main.jpg)' }">
           <div class="panorama-overlay"></div>
           <div class="panorama-title">
-            <h2>深汕特别合作区</h2>
+            <h2>深汕焕新 奋战百千万</h2>
             <p>山海新城·产业高地</p>
           </div>
         </div>
@@ -77,7 +77,7 @@
             <div class="highlights-grid">
               <div
                 class="highlight-item"
-                v-for="(item, index) in highlights"
+                v-for="(_item, index) in highlights"
                 :key="index"
                 :class="{ visible: visibleHighlights >= index }"
               >
@@ -95,14 +95,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Autoplay, Pagination, EffectCoverflow, EffectCube } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import { useTypewriter } from '@/composables/useTypewriter'
 
-// 导入 Swiper 样式
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/effect-coverflow'
-import 'swiper/css/effect-cube'
+// Swiper 12+ 不需要单独导入CSS
 
 const sectionRef = ref<HTMLElement | null>(null)
 const { typeText } = useTypewriter()
@@ -118,7 +114,6 @@ const displayHighlights = ref<string[]>([])
 const visibleHighlights = ref(-1)
 
 const cubeModules = [Autoplay]
-const carouselModules = [Autoplay, Pagination, EffectCoverflow]
 
 // 小标题数据
 const highlights = [

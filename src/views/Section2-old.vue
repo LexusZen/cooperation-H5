@@ -51,7 +51,7 @@
                     v-for="(indicator, indIndex) in indicators"
                     :key="indIndex"
                     :style="{
-                      height: (year.values[indIndex] / maxValue * 100) + '%',
+                      height: ((year.values[indIndex] ?? 0) / maxValue * 100) + '%',
                       background: indicator.color
                     }"
                   >
