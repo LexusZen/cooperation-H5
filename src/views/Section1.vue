@@ -99,7 +99,8 @@ import { Autoplay } from 'swiper/modules'
 import { useTypewriter } from '@/composables/useTypewriter'
 import { getImageUrl } from '@/utils/assets'
 
-// Swiper 12+ 不需要单独导入CSS
+// 导入 Swiper 样式
+import 'swiper/swiper-bundle.css'
 
 const sectionRef = ref<HTMLElement | null>(null)
 const { typeText } = useTypewriter()
