@@ -1,177 +1,683 @@
 <template>
   <div class="section section-3" ref="sectionRef">
+    <!-- 背景图 -->
+    <div class="bg-image"></div>
+
     <div class="content">
       <h2 class="section-title">深汕智造，通达全球</h2>
-      <div class="features-grid">
-        <div class="feature-card" v-for="(item, index) in features" :key="index">
-          <div class="icon">{{ item.icon }}</div>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
-        </div>
-      </div>
-      <div class="world-map">
-        <div class="map-container">
-          <div class="map-icon">🌍</div>
-          <h3>11条国际航线</h3>
-          <p class="routes">通达欧洲、南美、东南亚、非洲等地区</p>
-          <div class="shipping-info">
-            <span class="badge">出口至澳大利亚，最快仅需10天</span>
+
+      <!-- 三个柱状图模块（纵向排列） -->
+      <div class="chart-modules">
+        <div
+          v-for="(module, moduleIndex) in chartModules"
+          :key="module.id"
+          class="chart-module"
+          :class="{ visible: visibleModules >= moduleIndex }"
+        >
+          <!-- 模块标题 -->
+          <div class="module-header">
+            <span class="module-icon">{{ module.icon }}</span>
+            <h3 class="module-title">{{ module.title }}</h3>
+          </div>
+
+          <!-- 左右布局容器 -->
+          <div class="module-content">
+            <!-- 左侧：柱状图 -->
+            <div class="chart-side">
+              <div class="chart-wrapper">
+                <div class="chart-bars">
+                  <div
+                    v-for="(item, barIndex) in module.data"
+                    :key="item.year"
+                    class="bar-item"
+                    :class="{ 'bar-visible': visibleBars[moduleIndex] >= barIndex }"
+                    @click="showBarDetail(item, module)"
+                  >
+                    <!-- 柱子 -->
+                    <div class="bar-wrapper">
+                      <div
+                        class="bar"
+                        :style="{
+                          height: (item.value / getMaxValue(module.data) * 100) + '%',
+                          background: item.color
+                        }"
+                      >
+                        <span class="bar-value">{{ formatValue(item.value, module.unit) }}</span>
+                      </div>
+                    </div>
+
+                    <!-- 年份标签 -->
+                    <div class="bar-label">{{ item.year }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧：文字介绍 -->
+            <div class="text-side">
+              <div class="text-content">
+                <!-- 主要描述 -->
+                <p class="description">
+                  {{ displayTexts[moduleIndex] || '' }}
+                </p>
+
+                <!-- 关键亮点 -->
+                <div v-if="module.highlights" class="highlights">
+                  <div
+                    v-for="(highlight, hIndex) in module.highlights"
+                    :key="hIndex"
+                    class="highlight-item"
+                  >
+                    <span class="highlight-dot">•</span>
+                    <span class="highlight-text">{{ highlight }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 点击柱子弹出的弹窗 -->
+    <transition name="fade">
+      <div v-if="activeBar" class="bar-tooltip" @click="activeBar = null">
+        <div class="tooltip-content" @click.stop>
+          <button class="close-btn" @click="activeBar = null">×</button>
+          <div class="tooltip-header">
+            <span class="tooltip-icon">{{ activeBar.icon }}</span>
+            <h4>{{ activeBar.title }}</h4>
+          </div>
+          <p class="tooltip-year">{{ activeBar.year }}</p>
+          <p class="tooltip-value">{{ activeBar.value }}{{ activeBar.unit }}</p>
+          <p class="tooltip-detail">{{ activeBar.detail }}</p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAnimation } from '@/composables/useAnimation'
 import { useIntersection } from '@/composables/useIntersection'
+import { useAnimation } from '@/composables/useAnimation'
+import { useTypewriter } from '@/composables/useTypewriter'
+import type { ChartModule, ChartDataItem } from '@/types'
 
 const sectionRef = ref<HTMLElement | null>(null)
-const { fadeInUp, scaleIn, createTimeline } = useAnimation()
+const visibleModules = ref(-1)
+const visibleBars = ref<number[]>([-1, -1, -1])
+const activeBar = ref<any>(null)
+const displayTexts = ref<string[]>(['', '', ''])
 
-const features = [
+const { createTimeline } = useAnimation()
+const { typeText } = useTypewriter()
+
+// 三个柱状图模块数据
+const chartModules: ChartModule[] = [
   {
-    icon: '🏭',
-    title: '全球首家第1300万辆',
-    desc: '新能源汽车下线里程碑工厂'
+    id: 'car-production',
+    title: '汽车年生产量',
+    unit: '万辆',
+    icon: '🚗',
+    description: '深汕合作区依托比亚迪等龙头企业，汽车产量实现爆发式增长。2023年达100万辆，2024年突破130万辆，2025年预计达150万辆，成为全球新能源汽车制造重镇。',
+    highlights: [
+      '2024年产量同比增长30%',
+      '全球首家1300万辆下线工厂',
+      '汽车制造业增加值增长621.1%'
+    ],
+    data: [
+      {
+        year: '2023',
+        value: 100,
+        color: 'linear-gradient(to top, #3b82f6, #60a5fa)',
+        detail: '2023年是深汕汽车产业的起飞之年，比亚迪深圳号工厂全面投产，实现年产100万辆的里程碑，标志着深汕合作区正式迈入汽车制造重镇行列。'
+      },
+      {
+        year: '2024',
+        value: 130,
+        color: 'linear-gradient(to top, #10b981, #34d399)',
+        detail: '2024年产量同比增长30%，达到130万辆。比亚迪二期项目投产，汽车制造业增加值增长621.1%，深汕成为华南地区最重要的新能源汽车生产基地之一。'
+      },
+      {
+        year: '2025',
+        value: 150,
+        color: 'linear-gradient(to top, #f59e0b, #fbbf24)',
+        detail: '2025年预计产量达150万辆，全球首家达成第1300万辆新能源汽车下线里程碑的工厂诞生于此，深汽车产业进入世界级制造集群。'
+      }
+    ]
   },
   {
+    id: 'tech-companies',
+    title: '高科技企业数量',
+    unit: '家',
     icon: '🏢',
-    title: '近30家企业汇聚',
-    desc: '速腾聚创、壁虎科技等产业链企业'
+    description: '围绕新能源汽车产业链，深汕合作区吸引了速腾聚创、壁虎科技等近30家创新型企业入驻，形成完整的产业生态链，企业数量年均增长40%以上。',
+    highlights: [
+      '涵盖整车制造到零部件全产业链',
+      '速腾聚创、壁虎科技等龙头企业',
+      '年均增长率超过40%'
+    ],
+    data: [
+      {
+        year: '2023',
+        value: 120,
+        color: 'linear-gradient(to top, #8b5cf6, #a78bfa)',
+        detail: '2023年已有120家规模以上工业企业落户，涵盖整车制造、零部件、智能驾驶等领域，初步形成产业集聚效应。'
+      },
+      {
+        year: '2024',
+        value: 180,
+        color: 'linear-gradient(to top, #ec4899, #f472b6)',
+        detail: '2024年企业数量突破180家，同比增长50%。产业集群效应显现，配套产业链日趋完善，吸引力持续增强。'
+      },
+      {
+        year: '2025',
+        value: 250,
+        color: 'linear-gradient(to top, #f59e0b, #fbbf24)',
+        detail: '2025年预计达250家，深汕成为粤港澳大湾区新能源汽车产业的核心承载地之一，产业生态更加完善。'
+      }
+    ]
   },
   {
-    icon: '⚡',
-    title: '5分钟极速集港',
-    desc: '出厂即出海，港厂联动'
+    id: 'car-exports',
+    title: '汽车出口量',
+    unit: '万辆',
+    icon: '🌍',
+    description: '依托小漠国际物流港，深汕实现"出厂即出海"。开通11条国际航线，产品远销欧洲、南美、东南亚、非洲等70多个国家和地区，出口量年均增长超过100%。',
+    highlights: [
+      '5分钟极速集港效率全球领先',
+      '11条国际航线通达全球',
+      '澳大利亚最快10天抵达'
+    ],
+    data: [
+      {
+        year: '2023',
+        value: 30,
+        color: 'linear-gradient(to top, #06b6d4, #22d3ee)',
+        detail: '2023年出口量达30万辆，主要出口至东南亚和非洲市场，出口增速全国领先，"出厂即出海"模式初步形成。'
+      },
+      {
+        year: '2024',
+        value: 65,
+        color: 'linear-gradient(to top, #10b981, #34d399)',
+        detail: '2024年出口量翻倍增长至65万辆，欧洲和南美市场实现突破，5分钟极速集港效率全球领先，国际影响力显著提升。'
+      },
+      {
+        year: '2025',
+        value: 90,
+        color: 'linear-gradient(to top, #f59e0b, #fbbf24)',
+        detail: '2025年出口量预计达90万辆，产品出口至澳大利亚最快仅需10天抵达，深汕成为中国新能源汽车出口的重要门户。'
+      }
+    ]
   }
 ]
 
+// 计算每个模块的最大值
+const getMaxValue = (data: ChartDataItem[]) => {
+  return Math.max(...data.map(item => item.value))
+}
+
+// 格式化数值显示
+const formatValue = (value: number, unit: string) => {
+  if (unit === '万辆' || unit === '家') {
+    return value.toString()
+  }
+  return value.toString()
+}
+
+// 显示柱子详情
+const showBarDetail = (bar: ChartDataItem, module: ChartModule) => {
+  activeBar.value = {
+    ...bar,
+    unit: module.unit,
+    icon: module.icon,
+    title: module.title
+  }
+}
+
+// 监听可见性，逐模块显示
 useIntersection(sectionRef, () => {
   const tl = createTimeline()
-  tl.add(fadeInUp('.section-title', { duration: 0.8 }))
-    .add(scaleIn('.feature-card', { duration: 0.6, delay: 0.1 }), '-=0.4')
-    .add(fadeInUp('.world-map', { duration: 1 }), '-=0.3')
-})
+
+  // 逐个模块显示
+  chartModules.forEach((module, moduleIndex) => {
+    tl.add(() => {
+      visibleModules.value = moduleIndex
+
+      // 该模块的柱子逐条显示
+      setTimeout(() => {
+        animateBars(moduleIndex)
+      }, 300)
+
+      // 打字机效果显示文字
+      setTimeout(() => {
+        typeText(
+          module.description,
+          (displayText) => {
+            displayTexts.value[moduleIndex] = displayText
+          },
+          {
+            speed: 30,
+            delay: 0
+          }
+        )
+      }, 800)
+    }, `+=${moduleIndex === 0 ? 0.5 : 1.5}`)
+  })
+}, { threshold: 0.2 })
+
+// 柱子逐条动画
+const animateBars = (moduleIndex: number) => {
+  chartModules[moduleIndex].data.forEach((_, barIndex) => {
+    setTimeout(() => {
+      visibleBars.value[moduleIndex] = barIndex
+    }, barIndex * 400) // 每条柱子间隔400ms
+  })
+}
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
 .section-3 {
+  position: relative;
   width: 100%;
-  height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: $text-light;
+  min-height: 100vh;
+  color: white;
+  padding: 60px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
-  overflow-y: auto;
+
+  .bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/section3/bg-industry.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
 
   .content {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     width: 100%;
   }
 
   .section-title {
-    font-size: 42px;
+    font-size: clamp(28px, 5vw, 42px);
     font-weight: bold;
     text-align: center;
-    margin-bottom: 60px;
+    color: white;
+    margin-bottom: 40px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   }
 
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
+  // 柱状图模块容器（纵向排列）
+  .chart-modules {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
-    .feature-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 40px 30px;
-      border-radius: 16px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    @media (max-width: 768px) {
+      gap: 15px;
+    }
 
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    // 单个模块
+    .chart-module {
+      background: rgba(229, 238, 255, 0.95);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+
+      &.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
-      .icon {
-        font-size: 48px;
-        margin-bottom: 20px;
+      @media (max-width: 768px) {
+        padding: 15px;
+        min-height: calc((100vh - 180px) / 3);
+        display: flex;
+        flex-direction: column;
       }
 
-      h3 {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 12px;
-        color: #fbbf24;
+      // 模块头部
+      .module-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+
+        .module-icon {
+          font-size: 28px;
+        }
+
+        .module-title {
+          font-size: clamp(18px, 3vw, 22px);
+          font-weight: bold;
+          color: rgb(22, 93, 255);
+          margin: 0;
+        }
       }
 
-      p {
-        font-size: 16px;
-        line-height: 1.6;
-        opacity: 0.9;
+      // 左右布局容器
+      .module-content {
+        display: grid;
+        grid-template-columns: 45% 55%;
+        gap: 20px;
+        align-items: center;
+
+        @media (max-width: 768px) {
+          grid-template-columns: 40% 60%;
+          gap: 12px;
+          flex: 1;
+        }
+
+        // 左侧：柱状图
+        .chart-side {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .chart-wrapper {
+            width: 100%;
+
+            .chart-bars {
+              display: flex;
+              justify-content: space-around;
+              align-items: flex-end;
+              height: 180px;
+              gap: 10px;
+              padding: 0 10px;
+              border-bottom: 3px solid #e5e7eb;
+              position: relative;
+
+              @media (max-width: 768px) {
+                height: 140px;
+                gap: 6px;
+                padding: 0 5px;
+              }
+
+              .bar-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                cursor: pointer;
+                opacity: 0;
+                transform: scaleY(0);
+                transform-origin: bottom;
+                transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+                &.bar-visible {
+                  opacity: 1;
+                  transform: scaleY(1);
+                }
+
+                &:hover {
+                  transform: scaleY(1.05) translateY(-5px);
+
+                  .bar {
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+                  }
+                }
+
+                .bar-wrapper {
+                  flex: 1;
+                  width: 100%;
+                  display: flex;
+                  align-items: flex-end;
+                  justify-content: center;
+
+                  .bar {
+                    width: 100%;
+                    max-width: 50px;
+                    min-height: 30px;
+                    border-radius: 8px 8px 0 0;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: center;
+                    padding-top: 8px;
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+                    position: relative;
+                    transition: all 0.3s ease;
+
+                    @media (max-width: 768px) {
+                      max-width: 35px;
+                      padding-top: 6px;
+                    }
+
+                    // 顶部高光
+                    &::before {
+                      content: '';
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      height: 4px;
+                      background: rgba(255, 255, 255, 0.6);
+                      border-radius: 8px 8px 0 0;
+                    }
+
+                    .bar-value {
+                      font-size: clamp(10px, 2vw, 13px);
+                      font-weight: bold;
+                      color: white;
+                      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+                      line-height: 1.2;
+                      text-align: center;
+                    }
+                  }
+                }
+
+                .bar-label {
+                  margin-top: 8px;
+                  font-size: clamp(11px, 2vw, 13px);
+                  font-weight: 600;
+                  color: #1f2937;
+
+                  @media (max-width: 768px) {
+                    margin-top: 6px;
+                    font-size: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        // 右侧：文字介绍
+        .text-side {
+          display: flex;
+          align-items: center;
+          padding: 15px;
+          background: rgba(22, 93, 255, 0.05);
+          border-radius: 12px;
+          border-left: 4px solid rgb(22, 93, 255);
+          height: 100%;
+
+          @media (max-width: 768px) {
+            padding: 10px;
+          }
+
+          .text-content {
+            width: 100%;
+
+            .description {
+              font-size: clamp(12px, 2.2vw, 14px);
+              color: #1f2937;
+              line-height: 1.7;
+              text-align: justify;
+              margin-bottom: 12px;
+
+              @media (max-width: 768px) {
+                font-size: 11px;
+                line-height: 1.6;
+                margin-bottom: 8px;
+              }
+            }
+
+            // 关键亮点列表
+            .highlights {
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+
+              .highlight-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
+                font-size: clamp(10px, 2vw, 12px);
+                color: #4b5563;
+                line-height: 1.5;
+
+                @media (max-width: 768px) {
+                  font-size: 10px;
+                  gap: 6px;
+                }
+
+                .highlight-dot {
+                  color: rgb(22, 93, 255);
+                  font-weight: bold;
+                  flex-shrink: 0;
+                }
+
+                .highlight-text {
+                  flex: 1;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 
-  .world-map {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    padding: 50px;
-    border-radius: 20px;
-    text-align: center;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+  // 弹窗样式
+  .bar-tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 
-    .map-container {
-      .map-icon {
-        font-size: 80px;
-        margin-bottom: 20px;
-        animation: pulse 2s ease-in-out infinite;
+    .tooltip-content {
+      background: rgba(229, 238, 255, 0.95);
+      border-radius: 20px;
+      padding: 35px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: slideUp 0.3s ease;
+
+      @media (max-width: 768px) {
+        padding: 25px;
       }
 
-      h3 {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 15px;
-        color: #fbbf24;
-      }
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        border: none;
+        background: rgba(22, 93, 255, 0.1);
+        border-radius: 50%;
+        font-size: 24px;
+        color: rgb(22, 93, 255);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      .routes {
-        font-size: 18px;
-        margin-bottom: 25px;
-        opacity: 0.9;
-      }
-
-      .shipping-info {
-        .badge {
-          display: inline-block;
-          background: $secondary-color;
-          color: #fff;
-          padding: 10px 25px;
-          border-radius: 30px;
-          font-size: 16px;
-          font-weight: 500;
+        &:hover {
+          background: rgb(22, 93, 255);
+          color: white;
+          transform: rotate(90deg);
         }
+      }
+
+      .tooltip-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+
+        .tooltip-icon {
+          font-size: 32px;
+        }
+
+        h4 {
+          font-size: clamp(18px, 3vw, 22px);
+          font-weight: bold;
+          color: rgb(22, 93, 255);
+          margin: 0;
+        }
+      }
+
+      .tooltip-year {
+        font-size: 16px;
+        font-weight: 600;
+        color: #6b7280;
+        margin-bottom: 10px;
+      }
+
+      .tooltip-value {
+        font-size: clamp(28px, 5vw, 36px);
+        font-weight: bold;
+        color: #1f2937;
+        margin-bottom: 15px;
+      }
+
+      .tooltip-detail {
+        font-size: clamp(14px, 2.5vw, 16px);
+        color: #4b5563;
+        line-height: 1.8;
       }
     }
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  50% {
-    transform: scale(1.05);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

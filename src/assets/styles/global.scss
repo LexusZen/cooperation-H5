@@ -15,6 +15,10 @@ html, body {
     'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // 性能优化
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
 }
 
 #app {
@@ -61,4 +65,169 @@ img {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.5);
+}
+
+// 所有section添加顶部和底部间距，避免被TopBar和底部导航条遮挡
+.section {
+  padding-top: 60px;
+  padding-bottom: 90px; // 底部导航条高度 + 额外间距
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style;
+
+  @media (min-width: 480px) {
+    padding-top: 65px;
+    padding-bottom: 95px;
+  }
+
+  @media (min-width: 768px) {
+    padding-top: 70px;
+    padding-bottom: 100px;
+  }
+}
+
+// 优化性能的通用类
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// 动画性能优化
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+// 汽车轮廓小标题背景（全局复用）
+.car-outline-bg {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 18px 24px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    0 0 0 2px rgba(22, 93, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  // 左侧汽车装饰
+  &::before {
+    content: '🚗';
+    font-size: 60px;
+    opacity: 0.08;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) rotate(-5deg);
+    transition: all 0.3s ease;
+  }
+
+  // 右侧汽车装饰
+  &::after {
+    content: '🏎️';
+    font-size: 50px;
+    opacity: 0.08;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%) rotate(5deg);
+    transition: all 0.3s ease;
+  }
+
+  // Hover 效果
+  &:hover {
+    transform: translateX(8px);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.2),
+      0 0 0 3px rgba(22, 93, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(240, 249, 255, 1) 100%);
+
+    &::before,
+    &::after {
+      opacity: 0.15;
+      animation: carMove 2s ease-in-out infinite;
+    }
+  }
+
+  // 文字和图标容器
+  .car-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, rgb(22, 93, 255), rgb(59, 130, 246));
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow:
+        0 0 12px rgba(22, 93, 255, 0.6),
+        0 0 20px rgba(22, 93, 255, 0.3);
+      animation: dotPulse 2s ease-in-out infinite;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.8;
+      }
+    }
+
+    .text {
+      flex: 1;
+      font-size: clamp(13px, 2.5vw, 16px);
+      color: #1f2937;
+      line-height: 1.7;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+// 变体：鲜艳色彩版本（用于重点强调）
+.car-outline-bg--vibrant {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe4e6 100%);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+
+  .car-content .dot {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.7), 0 0 25px rgba(239, 68, 68, 0.4);
+  }
+}
+
+// 汽车移动动画
+@keyframes carMove {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(5px);
+  }
+}
+
+// 点脉冲动画
+@keyframes dotPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(22, 93, 255, 0.6), 0 0 20px rgba(22, 93, 255, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(22, 93, 255, 0.9), 0 0 30px rgba(22, 93, 255, 0.5);
+    transform: scale(1.15);
+  }
 }
