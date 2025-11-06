@@ -61,14 +61,27 @@
         <div class="bg-image" :style="{ backgroundImage: `url(${getImageUrl('/images/section1/bg-main.jpg')})` }"></div>
 
         <div class="content">
-          <h1 class="main-title">山海新城，产业高地</h1>
+          <h1 class="main-title">深汕焕新 奋战百千万</h1>
 
-          <div class="subtitle-group">
-            <div class="car-outline-bg">
-              <div class="car-content">
-                <div class="dot"></div>
-                <div class="text">{{ displaySubtitle1 }}</div>
-              </div>
+          <!-- 序言部分 -->
+          <div class="preface-section">
+            <div class="preface-line" :class="{ visible: visiblePreface >= 0 }">
+              <span class="preface-text">{{ displayPreface[0] || '' }}</span>
+            </div>
+            <div class="preface-line" :class="{ visible: visiblePreface >= 1 }">
+              <span class="preface-text">{{ displayPreface[1] || '' }}</span>
+            </div>
+            <div class="preface-line" :class="{ visible: visiblePreface >= 2 }">
+              <span class="preface-text">{{ displayPreface[2] || '' }}</span>
+            </div>
+            <div class="preface-line" :class="{ visible: visiblePreface >= 3 }">
+              <span class="preface-text">{{ displayPreface[3] || '' }}</span>
+            </div>
+            <div class="preface-line" :class="{ visible: visiblePreface >= 4 }">
+              <span class="preface-text">{{ displayPreface[4] || '' }}</span>
+            </div>
+            <div class="preface-line" :class="{ visible: visiblePreface >= 5 }">
+              <span class="preface-text">{{ displayPreface[5] || '' }}</span>
             </div>
           </div>
 
@@ -110,12 +123,21 @@ const currentStage = ref(1)
 const loadingProgress = ref(0)
 
 // Content display
-const displaySubtitle1 = ref('')
-const displaySubtitle2 = ref('')
+const displayPreface = ref<string[]>(['', '', '', '', '', ''])
+const visiblePreface = ref(-1)
 const displayHighlights = ref<string[]>([])
 const visibleHighlights = ref(-1)
 
 const cubeModules = [Autoplay]
+
+// 序言数据
+const prefaceLines = [
+  '这里，是"百千万工程"的实践热土；',
+  '这里，以车兴产、以产促城、产城融合、以工哺农；',
+  '于山海之间，',
+  '崛起一座汽车新城，',
+  '绘就了区域协调新画卷。'
+]
 
 // 小标题数据
 const highlights = [
@@ -194,20 +216,22 @@ const onCarouselEnd = () => {
 const enterPage = () => {
   currentStage.value = 4
 
-  // Typewriter for subtitles
+  // 序言打字机效果
   setTimeout(() => {
-    typeText('地区生产总值奋力跃升', (text) => {
-      displaySubtitle1.value = text
-    }, { speed: 50 })
+    prefaceLines.forEach((line, index) => {
+      setTimeout(() => {
+        visiblePreface.value = index
+
+        setTimeout(() => {
+          typeText(line, (text) => {
+            displayPreface.value[index] = text
+          }, { speed: 40 })
+        }, 100)
+      }, index * 800)
+    })
   }, 500)
 
-  setTimeout(() => {
-    typeText('以30%的高增速领跑', (text) => {
-      displaySubtitle2.value = text
-    }, { speed: 50 })
-  }, 2000)
-
-  // Show highlights one by one with typewriter
+  // 小标题列表打字机效果 (在序言之后)
   setTimeout(() => {
     highlights.forEach((highlight, index) => {
       setTimeout(() => {
@@ -220,7 +244,7 @@ const enterPage = () => {
         }, 300)
       }, index * 800)
     })
-  }, 3500)
+  }, prefaceLines.length * 800 + 1000) // 序言完成后1秒开始
 }
 
 onMounted(() => {
@@ -455,31 +479,70 @@ onMounted(() => {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px 20px 40px; // 顶部减少20px,向上移动
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-top: -40px; // 整体向上移动40px
 
     @media (max-width: 768px) {
-      padding: 30px 15px;
+      padding: 15px 15px 30px;
+      margin-top: -30px; // 移动端向上移动30px
     }
   }
 
   .main-title {
     font-size: clamp(28px, 5vw, 48px);
     font-weight: bold;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     letter-spacing: 2px;
     padding: 0 10px;
     color: rgb(22, 93, 255);
     text-shadow: 0 2px 10px rgba(22, 93, 255, 0.3);
   }
 
-  .subtitle-group {
-    max-width: 700px;
-    margin: 0 auto 30px;
-    padding: 0 15px;
+  // 序言区域
+  .preface-section {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(229, 238, 255, 0.95) 0%, rgba(229, 238, 255, 0.9) 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    @media (max-width: 768px) {
+      padding: 20px 15px;
+      margin: 0 15px 30px;
+    }
+
+    .preface-line {
+      font-size: clamp(15px, 3vw, 20px);
+      line-height: 2;
+      color: #1f2937;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+      margin-bottom: 8px;
+
+      &.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .preface-text {
+        display: inline-block;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   // 小标题列表区域
