@@ -4,7 +4,7 @@
     <div class="canvas-container">
       <!-- 上半部分：背景图 -->
       <div class="background-section">
-        <img :src="person.background || '/images/section1/bg-main.jpg'" :alt="person.name" />
+        <img :src="person.background || getImageUrl('/images/section1/bg-main.jpg')" :alt="person.name" />
       </div>
 
       <!-- 下半部分：人物信息和引文 -->
@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import type { InterviewPerson } from '@/types'
+import { getImageUrl } from '@/utils/assets'
 
 defineProps<{
   person: InterviewPerson

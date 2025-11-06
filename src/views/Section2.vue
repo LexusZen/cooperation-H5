@@ -65,6 +65,7 @@
 import { ref } from 'vue'
 import { useIntersection } from '@/composables/useIntersection'
 import { useTypewriter } from '@/composables/useTypewriter'
+import { getImageUrl } from '@/utils/assets'
 
 const sectionRef = ref<HTMLElement | null>(null)
 const visibleNodes = ref(-1)
@@ -78,19 +79,19 @@ const timelineData = [
     year: '2022年4月',
     title: '起步阶段',
     desc: '深汕合作区启动基础设施建设，招商引资全面展开',
-    image: '/images/section2/timeline-2022.jpg'
+    image: getImageUrl('/images/section2/timeline-2022.jpg')
   },
   {
     year: '2023年5月',
     title: '加速发展',
     desc: '比亚迪二期项目启动，从动工到投产仅10个月',
-    image: '/images/section2/timeline-2023.jpg'
+    image: getImageUrl('/images/section2/timeline-2023.jpg')
   },
   {
     year: '2025年5月',
     title: '跨越突破',
     desc: '四期电池包项目从签约到投产仅半年，深汕速度创新高',
-    image: '/images/section2/timeline-2025.jpg'
+    image: getImageUrl('/images/section2/timeline-2025.jpg')
   }
 ]
 
@@ -99,17 +100,17 @@ const projects = [
   {
     badge: '10个月',
     title: '深汕比亚迪汽车工业园二期东地块从动工到投产仅10个月',
-    image: '/images/section2/timeline-2023.jpg'
+    image: getImageUrl('/images/section2/timeline-2023.jpg')
   },
   {
     badge: '半年',
     title: '深汕比亚迪汽车工业园四期电池包PACK项目从签约到投产仅半年',
-    image: '/images/section2/timeline-2025.jpg'
+    image: getImageUrl('/images/section2/timeline-2025.jpg')
   },
   {
     badge: '2025年',
     title: '1-7月基础设施投资增长31.5%，基建提速赋能发展强化',
-    image: '/images/section2/timeline-2022.jpg'
+    image: getImageUrl('/images/section2/timeline-2022.jpg')
   }
 ]
 

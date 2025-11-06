@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { getImageUrl } from '@/utils/assets'
 import { useAnimation } from '@/composables/useAnimation'
 import { useIntersection } from '@/composables/useIntersection'
 
@@ -38,19 +39,19 @@ const highlights = [
     title: '',
     description:
       '9个行政村迈入"百万俱乐部"，1个行政村勇闯"千万大关"。明热村成为深汉首个集体收入破千万的行政村，引领乡村振兴新标杆，村民钱袋子越来越鼓。',
-    image: '/images/section5/mingre-village.jpg'
+    image: getImageUrl('/images/section5/mingre-village.jpg')
   },
   {
     title: '',
     description:
       '建成四好农村路50.9公里，完成42公里自然村通村道路硬化。建成4个镇（街）级生活垃圾转运站，187个自然村实现污水集中处理，39个行政村（社区）5G全覆盖。',
-    image: '/images/section5/baian-village.jpg'
+    image: getImageUrl('/images/section5/baian-village.jpg')
   },
   {
     title: '',
     description:
       '红罗村、田心村入选第三批全国乡村治理示范村，治理模式获国家认可。11个惠民公园建成开放，提升村民幸福感，五光十色示范带加快建设，美丽圩镇焕新颜。',
-    image: '/images/section5/hongluo-village.jpg'
+    image: getImageUrl('/images/section5/hongluo-village.jpg')
   }
 ]
 

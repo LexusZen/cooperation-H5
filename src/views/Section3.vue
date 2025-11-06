@@ -1,7 +1,7 @@
 <template>
   <div class="section section-3" ref="sectionRef">
     <!-- 背景图 -->
-    <div class="bg-image"></div>
+    <div class="bg-image" :style="{ backgroundImage: `url(${getImageUrl('/images/section3/bg-industry.jpg')})` }"></div>
 
     <div class="content">
       <h2 class="section-title">深汕智造，通达全球</h2>
@@ -102,6 +102,7 @@ import { ref } from 'vue'
 import { useIntersection } from '@/composables/useIntersection'
 import { useAnimation } from '@/composables/useAnimation'
 import { useTypewriter } from '@/composables/useTypewriter'
+import { getImageUrl } from '@/utils/assets'
 import type { ChartModule, ChartDataItem } from '@/types'
 
 const sectionRef = ref<HTMLElement | null>(null)
@@ -297,7 +298,6 @@ const animateBars = (moduleIndex: number) => {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/images/section3/bg-industry.jpg');
     background-size: cover;
     background-position: center;
     z-index: 0;

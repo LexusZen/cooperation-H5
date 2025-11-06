@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { getImageUrl } from '@/utils/assets'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
 import { useIntersection } from '@/composables/useIntersection'
@@ -99,21 +100,21 @@ const facilities = [
   {
     title: '深圳市深汕人民医院',
     subtitle: '深圳品质医疗可及',
-    image: '/images/section4/hospital.jpg',
+    image: getImageUrl('/images/section4/hospital.jpg'),
     caption: '深汕人民医院2025年底建成，深圳品质医疗可及',
     description: '深汕人民医院预计2025年底建成，引入深圳优质医疗资源，提供三甲医院标准的医疗服务，让深汕居民在家门口就能享受到深圳品质的医疗保障。'
   },
   {
     title: '深圳中学高中园',
     subtitle: '优质教育资源落地',
-    image: '/images/section4/school.jpg',
+    image: getImageUrl('/images/section4/school.jpg'),
     caption: '深圳中学高中园已招生，深职大校区2026年启用',
     description: '深圳中学高中园已于2024年开始招生，深圳职业技术大学校区将于2026年启用，将深圳一流的教育资源导入深汕，为本地学子提供优质教育机会。'
   },
   {
     title: '赤河广场保障房片区',
     subtitle: '安居梦照进现实',
-    image: '/images/section4/housing.jpg',
+    image: getImageUrl('/images/section4/housing.jpg'),
     caption: '超2万套保障房落地，安居梦照进现实（"双六十"住房保障体系）',
     description: '超2万套保障房陆续落地，建立"双六十"住房保障体系（60%保障性住房+60%人才住房），让深汕成为真正留得住人才、安得下家的宜居之城。'
   }
@@ -124,21 +125,21 @@ const transportData = [
   {
     title: '广汕高铁深汕站',
     subtitle: '高铁时代来临',
-    image: '/images/section4/train.jpg',
+    image: getImageUrl('/images/section4/train.jpg'),
     caption: '广汕高铁已经通车，深汕高铁加快建设（广州40分钟、深圳30分钟生活圈加速形成）',
     description: '广汕高铁已经通车，深汕高铁加快建设，深圳30分钟、广州40分钟生活圈加速形成，构建起连接粤港澳大湾区的快速交通网络。'
   },
   {
     title: '深汕西高速',
     subtitle: '畅达交通网络',
-    image: '/images/section4/highway.jpg',
+    image: getImageUrl('/images/section4/highway.jpg'),
     caption: '深汕西高速改扩建全线通车',
     description: '深汕西高速改扩建全线通车，大幅缩短深汕与粤港澳大湾区核心城市的时空距离，为产业发展和人员往来提供便利。'
   },
   {
     title: '通港大道',
     subtitle: '集成式改革试点',
-    image: '/images/section4/main-road.jpg',
+    image: getImageUrl('/images/section4/main-road.jpg'),
     caption: '"集成式改革"试点推进，治理效能持续提升',
     description: '通港大道项目是深汕特别合作区集成式改革试点的重要成果，通过创新机制和高效治理，打造连接港口与城区的现代化交通大动脉，展现深汕治理效能的持续提升。'
   }

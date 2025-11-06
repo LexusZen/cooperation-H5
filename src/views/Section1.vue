@@ -17,7 +17,7 @@
     <!-- Stage 2: Panorama Full Screen (3-6s) -->
     <transition name="fade">
       <div v-if="currentStage === 2" class="panorama-stage">
-        <div class="panorama-image" :style="{ backgroundImage: 'url(/images/section1/bg-main.jpg)' }">
+        <div class="panorama-image" :style="{ backgroundImage: `url(${getImageUrl('/images/section1/bg-main.jpg')})` }">
           <div class="panorama-overlay"></div>
           <div class="panorama-title">
             <h2>深汕焕新 奋战百千万</h2>
@@ -58,7 +58,7 @@
     <!-- Stage 4: Content Display (auto-enter after carousel) -->
     <transition name="fade">
       <div v-if="currentStage === 4" class="content-stage">
-        <div class="bg-image"></div>
+        <div class="bg-image" :style="{ backgroundImage: `url(${getImageUrl('/images/section1/bg-main.jpg')})` }"></div>
 
         <div class="content">
           <h1 class="main-title">山海新城，产业高地</h1>
@@ -97,6 +97,7 @@ import { ref, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay } from 'swiper/modules'
 import { useTypewriter } from '@/composables/useTypewriter'
+import { getImageUrl } from '@/utils/assets'
 
 // Swiper 12+ 不需要单独导入CSS
 
@@ -130,17 +131,17 @@ const highlights = [
 // 产业地标图片
 const landmarkImages = [
   {
-    src: '/images/section1/landmark-1.jpg',
+    src: getImageUrl('/images/section1/landmark-1.jpg'),
     alt: '比亚迪深圳号',
     label: '比亚迪深圳号 - 出厂即出海'
   },
   {
-    src: '/images/section1/landmark-2.jpg',
+    src: getImageUrl('/images/section1/landmark-2.jpg'),
     alt: '深汕比亚迪二期工程',
     label: '深汕比亚迪二期 - 高速建设'
   },
   {
-    src: '/images/section1/landmark-3.jpg',
+    src: getImageUrl('/images/section1/landmark-3.jpg'),
     alt: '小漠国际物流港',
     label: '小漠国际物流港 - 5分钟极速集港'
   }
@@ -434,7 +435,6 @@ onMounted(() => {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/images/section1/bg-main.jpg');
     background-size: cover;
     background-position: center;
     z-index: 0;

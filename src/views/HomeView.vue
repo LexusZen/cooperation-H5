@@ -81,6 +81,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
 import type { InterviewPerson } from '@/types'
+import { getImageUrl } from '@/utils/assets'
 
 import Section1 from './Section1.vue'
 import Section2 from './Section2.vue'
@@ -113,21 +114,21 @@ const interviewPeople: InterviewPerson[] = [
     id: 1,
     name: '张总',
     role: '新能源汽车产业链企业家',
-    avatar: '/images/interview/avatar1.jpg',
+    avatar: getImageUrl('/images/interview/avatar1.jpg'),
     quote: '产业全链条都本地化，项目当年动工当年投产，在这里投资省时省力又省心。'
   },
   {
     id: 2,
     name: '李阿姨',
     role: '大安村村民',
-    avatar: '/images/interview/avatar2.jpg',
+    avatar: getImageUrl('/images/interview/avatar2.jpg'),
     quote: '"百千万工程"让我们村变了样！以前是守着绿水青山过穷日子，现在路通了、网快了、环境美了，家门口就能就业增收，这日子真有奔头！'
   },
   {
     id: 3,
     name: '王先生',
     role: '来深建设者',
-    avatar: '/images/interview/avatar3.jpg',
+    avatar: getImageUrl('/images/interview/avatar3.jpg'),
     quote: '我选择深汕，看中的是这里的未来潜力与宜居本色。这里是半城山水半城产业，既能追逐梦想，也能安放生活，完美诠释了什么是"产城融合"。'
   }
 ]
