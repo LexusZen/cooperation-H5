@@ -219,14 +219,14 @@ useIntersection(sectionRef, () => {
 
   // 民生设施轮播容器
   .carousel-container {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     .carousel-title {
-      font-size: clamp(18px, 3vw, 22px);
+      font-size: clamp(16px, 2.8vw, 20px);
       font-weight: bold;
       color: rgb(16, 224, 248);
       text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-align: center;
     }
 
@@ -244,14 +244,14 @@ useIntersection(sectionRef, () => {
         }
 
         .facility-image {
-          border-radius: 16px 16px 0 0;
+          border-radius: 14px 14px 0 0;
           overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 
           img {
             width: 100%;
             height: auto;
-            aspect-ratio: 20 / 9;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
@@ -267,25 +267,25 @@ useIntersection(sectionRef, () => {
           background: rgba(229, 238, 255, 0.6);
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
-          padding: 18px;
-          border-radius: 0 0 16px 16px;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+          padding: 14px;
+          border-radius: 0 0 14px 14px;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 
           h4 {
-            font-size: clamp(16px, 2.8vw, 19px);
+            font-size: clamp(15px, 2.6vw, 18px);
             font-weight: bold;
             color: rgb(16, 224, 248);
             text-shadow: 0 0 10px rgba(16, 224, 248, 0.4);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: center;
           }
 
           .caption-text {
-            font-size: clamp(12px, 2.2vw, 14px);
+            font-size: clamp(11px, 2vw, 13px);
             color: white;
-            line-height: 1.6;
+            line-height: 1.5;
             text-align: center;
-            min-height: 40px;
+            min-height: 36px;
           }
         }
       }
@@ -311,14 +311,14 @@ useIntersection(sectionRef, () => {
 
   // 交通路网容器
   .transport-container {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 
     .transport-title {
-      font-size: clamp(18px, 3vw, 22px);
+      font-size: clamp(16px, 2.8vw, 20px);
       font-weight: bold;
       color: rgb(16, 224, 248);
       text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-align: center;
     }
 
@@ -334,9 +334,9 @@ useIntersection(sectionRef, () => {
         }
 
         .transport-image {
-          border-radius: 16px 16px 0 0;
+          border-radius: 14px 14px 0 0;
           overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 
           img {
             width: 100%;
@@ -357,25 +357,25 @@ useIntersection(sectionRef, () => {
           background: rgba(229, 238, 255, 0.6);
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
-          padding: 20px;
-          border-radius: 0 0 16px 16px;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+          padding: 14px;
+          border-radius: 0 0 14px 14px;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 
           h4 {
-            font-size: clamp(18px, 3vw, 22px);
+            font-size: clamp(16px, 2.8vw, 20px);
             font-weight: bold;
             color: rgb(16, 224, 248);
             text-shadow: 0 0 10px rgba(16, 224, 248, 0.4);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
           }
 
           .caption-text {
-            font-size: clamp(13px, 2.5vw, 15px);
+            font-size: clamp(12px, 2.2vw, 14px);
             color: white;
-            line-height: 1.6;
+            line-height: 1.5;
             text-align: center;
-            min-height: 48px;
+            min-height: 40px;
           }
         }
       }
