@@ -305,7 +305,7 @@ useIntersection(sectionRef, () => {
           }
 
           .timeline-dot {
-            left: 18px;
+            left: 24px;
           }
         }
       }
@@ -332,7 +332,7 @@ useIntersection(sectionRef, () => {
           }
 
           .timeline-dot {
-            left: 18px;
+            left: 24px;
             right: auto;
           }
         }
