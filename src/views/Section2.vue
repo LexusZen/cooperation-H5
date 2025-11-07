@@ -184,7 +184,7 @@ useIntersection(sectionRef, () => {
     // 时间节点
     .timeline-node {
       position: relative;
-      margin-bottom: 15px;
+      margin-bottom: 40px;
       opacity: 0;
       transform: scale(0.8);
       transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -230,11 +230,11 @@ useIntersection(sectionRef, () => {
       // 内容卡片
       .timeline-card {
         width: 55%;
-        max-width: 260px;
+        max-width: 300px;
         background: rgba(229, 238, 255, 0.6);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
@@ -246,7 +246,7 @@ useIntersection(sectionRef, () => {
 
         .card-image {
           width: 100%;
-          height: 70px;
+          height: 100px;
           overflow: hidden;
 
           img {
@@ -262,20 +262,20 @@ useIntersection(sectionRef, () => {
         }
 
         .card-content {
-          padding: 8px 10px;
+          padding: 12px 14px;
 
           h4 {
-            font-size: clamp(13px, 2.2vw, 15px);
+            font-size: clamp(14px, 2.5vw, 16px);
             font-weight: bold;
             color: white;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
           }
 
           p {
-            font-size: clamp(10px, 1.8vw, 12px);
+            font-size: clamp(11px, 2vw, 13px);
             color: rgba(255, 255, 255, 0.9);
-            line-height: 1.3;
-            min-height: 24px;
+            line-height: 1.4;
+            min-height: 32px;
           }
         }
       }
@@ -434,27 +434,27 @@ useIntersection(sectionRef, () => {
   .section-2 {
     .timeline-vertical {
       .timeline-node {
-        margin-bottom: 20px;
+        margin-bottom: 35px;
 
         .timeline-card {
           width: 85%;
           max-width: 100%;
 
           .card-image {
-            height: 80px;
+            height: 100px;
           }
 
           .card-content {
-            padding: 10px;
+            padding: 12px;
 
             h4 {
-              font-size: 13px;
-              margin-bottom: 5px;
+              font-size: 14px;
+              margin-bottom: 6px;
             }
 
             p {
-              font-size: 11px;
-              min-height: 26px;
+              font-size: 12px;
+              min-height: 30px;
             }
           }
         }
