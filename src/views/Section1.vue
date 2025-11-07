@@ -76,7 +76,6 @@
                 :key="index"
                 :class="{ visible: visibleHighlights >= index }"
               >
-                <div class="dot"></div>
                 <div class="text">{{ displayHighlights[index] || '' }}</div>
               </div>
             </div>
@@ -838,11 +837,25 @@ onMounted(() => {
 @keyframes panoramaTitleFadeIn {
   0% {
     opacity: 0;
-    transform: translate(-50%, -40%);
+    transform: translate(-50%, calc(-50% - 250px));
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, calc(-50% - 220px));
+  }
+}
+
+// 移动端动画
+@media (max-width: 768px) {
+  @keyframes panoramaTitleFadeIn {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, calc(-50% - 150px));
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, calc(-50% - 120px));
+    }
   }
 }
 
