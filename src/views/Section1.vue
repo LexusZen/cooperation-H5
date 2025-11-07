@@ -105,7 +105,7 @@ const loadingProgress = ref(0)
 
 // Content display
 // 全景阶段序言
-const displayPanoramaPreface = ref<string[]>(['', '', '', '', ''])
+const displayPanoramaPreface = ref<string[]>(['', '', '', ''])
 const visiblePanoramaPreface = ref(-1)
 // 主内容阶段数据
 const displayHighlights = ref<string[]>([])
@@ -116,8 +116,8 @@ const cubeModules = [Autoplay]
 // 序言数据
 const prefaceLines = [
   '这里，是"百千万工程"的实践热土；',
-  '这里，以车兴产、以产促城、产城融合、以工哺农；',
-  '于山海之间，崛起一座汽车新城，',
+  '这里，以车兴产、以产促城、产城融合、',
+  '以工哺农；于山海之间，崛起一座汽车新城，',
   '绘就了区域协调新画卷。'
 ]
 
