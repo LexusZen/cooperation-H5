@@ -346,17 +346,17 @@ useIntersection(sectionRef, () => {
     margin-top: auto; // 推到底部，但不会覆盖时间轴
 
     .projects-title {
-      font-size: clamp(20px, 3.5vw, 24px);
+      font-size: clamp(18px, 3vw, 22px);
       font-weight: bold;
       color: white;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      gap: 16px;
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -366,19 +366,19 @@ useIntersection(sectionRef, () => {
         background: rgba(229, 238, 255, 0.6);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border-radius: 16px;
+        border-radius: 14px;
         overflow: hidden;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+          transform: translateY(-6px);
+          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
         }
 
         .project-image {
           width: 100%;
-          height: 140px;
+          height: 100px;
           overflow: hidden;
 
           img {
@@ -394,22 +394,22 @@ useIntersection(sectionRef, () => {
         }
 
         .project-info {
-          padding: 15px;
+          padding: 12px;
 
           .project-badge {
             display: inline-block;
             background: linear-gradient(135deg, $primary-color, $secondary-color);
             color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: clamp(12px, 2.5vw, 14px);
+            padding: 5px 14px;
+            border-radius: 18px;
+            font-size: clamp(11px, 2.3vw, 13px);
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
           }
 
           .project-title {
-            font-size: clamp(14px, 3vw, 16px);
-            line-height: 1.6;
+            font-size: clamp(13px, 2.8vw, 15px);
+            line-height: 1.5;
             color: white;
             font-weight: 500;
           }
@@ -463,15 +463,15 @@ useIntersection(sectionRef, () => {
 
     .key-projects {
       .projects-grid {
-        gap: 20px;
+        gap: 14px;
 
         .project-card {
           .project-image {
-            height: 150px;
+            height: 110px;
           }
 
           .project-info {
-            padding: 15px;
+            padding: 12px;
           }
         }
       }
