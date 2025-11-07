@@ -144,27 +144,27 @@ useIntersection(sectionRef, () => {
 .section-2 {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, rgb(229, 238, 255), #e0f2fe);
-  padding: 60px 20px;
+  background: rgb(37, 32, 126);
+  padding: 80px 20px 60px;
+  display: flex;
+  flex-direction: column;
 
   .content {
     max-width: 1000px;
     margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
-  .section-title {
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: bold;
-    text-align: center;
-    color: rgb(22, 93, 255);
-    margin-bottom: 60px;
-  }
 
   // 竖向时间轴
   .timeline-vertical {
     position: relative;
-    padding: 40px 0;
-    margin-bottom: 60px;
+    padding: 0;
+    margin-bottom: 30px;
+    flex-shrink: 0; // 防止被压缩
 
     // 中心连接线
     .timeline-line {
@@ -184,7 +184,7 @@ useIntersection(sectionRef, () => {
     // 时间节点
     .timeline-node {
       position: relative;
-      margin-bottom: 60px;
+      margin-bottom: 15px;
       opacity: 0;
       transform: scale(0.8);
       transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -204,9 +204,9 @@ useIntersection(sectionRef, () => {
         top: 0;
         background: linear-gradient(135deg, #3b82f6, #1e40af);
         color: white;
-        padding: 10px 24px;
-        border-radius: 30px;
-        font-size: clamp(14px, 2.5vw, 16px);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: clamp(12px, 2vw, 14px);
         font-weight: bold;
         box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         white-space: nowrap;
@@ -216,23 +216,25 @@ useIntersection(sectionRef, () => {
       // 中心圆点
       .timeline-dot {
         position: absolute;
-        top: 8px;
-        width: 20px;
-        height: 20px;
+        top: 4px;
+        width: 12px;
+        height: 12px;
         background: #fbbf24;
-        border: 4px solid white;
+        border: 2px solid white;
         border-radius: 50%;
-        box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3), 0 0 20px rgba(251, 191, 36, 0.5);
+        box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3), 0 0 15px rgba(251, 191, 36, 0.5);
         z-index: 3;
         animation: pulse 2s ease-in-out infinite;
       }
 
       // 内容卡片
       .timeline-card {
-        width: 70%;
-        max-width: 400px;
-        background: rgba(229, 238, 255, 0.95);
-        border-radius: 16px;
+        width: 55%;
+        max-width: 260px;
+        background: rgba(229, 238, 255, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
@@ -244,7 +246,7 @@ useIntersection(sectionRef, () => {
 
         .card-image {
           width: 100%;
-          height: 180px;
+          height: 70px;
           overflow: hidden;
 
           img {
@@ -260,20 +262,20 @@ useIntersection(sectionRef, () => {
         }
 
         .card-content {
-          padding: 20px;
+          padding: 8px 10px;
 
           h4 {
-            font-size: clamp(16px, 3vw, 18px);
+            font-size: clamp(13px, 2.2vw, 15px);
             font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 10px;
+            color: white;
+            margin-bottom: 4px;
           }
 
           p {
-            font-size: clamp(13px, 2.5vw, 14px);
-            color: #6b7280;
-            line-height: 1.6;
-            min-height: 40px;
+            font-size: clamp(10px, 1.8vw, 12px);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.3;
+            min-height: 24px;
           }
         }
       }
@@ -282,28 +284,28 @@ useIntersection(sectionRef, () => {
       &.node-left {
         display: flex;
         justify-content: flex-end;
-        padding-right: calc(50% + 40px);
+        padding-right: calc(50% + 25px);
 
         .year-badge {
-          right: calc(50% + 60px);
+          right: calc(50% + 40px);
         }
 
         .timeline-dot {
-          left: calc(50% - 10px);
+          left: calc(50% - 7px);
         }
 
         @media (max-width: 768px) {
           justify-content: flex-start;
           padding-right: 0;
-          padding-left: 70px;
+          padding-left: 60px;
 
           .year-badge {
-            left: 70px;
+            left: 60px;
             right: auto;
           }
 
           .timeline-dot {
-            left: 20px;
+            left: 18px;
           }
         }
       }
@@ -312,25 +314,25 @@ useIntersection(sectionRef, () => {
       &.node-right {
         display: flex;
         justify-content: flex-start;
-        padding-left: calc(50% + 40px);
+        padding-left: calc(50% + 25px);
 
         .year-badge {
-          left: calc(50% + 60px);
+          left: calc(50% + 40px);
         }
 
         .timeline-dot {
-          right: calc(50% - 10px);
+          right: calc(50% - 7px);
         }
 
         @media (max-width: 768px) {
-          padding-left: 70px;
+          padding-left: 60px;
 
           .year-badge {
-            left: 70px;
+            left: 60px;
           }
 
           .timeline-dot {
-            left: 20px;
+            left: 18px;
             right: auto;
           }
         }
@@ -340,25 +342,30 @@ useIntersection(sectionRef, () => {
 
   // 重点项目展示
   .key-projects {
+    flex-shrink: 0; // 防止被压缩
+    margin-top: auto; // 推到底部，但不会覆盖时间轴
+
     .projects-title {
-      font-size: clamp(22px, 4vw, 28px);
+      font-size: clamp(20px, 3.5vw, 24px);
       font-weight: bold;
-      color: $text-dark;
+      color: white;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
       }
 
       .project-card {
-        background: rgba(229, 238, 255, 0.95);
+        background: rgba(229, 238, 255, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -371,7 +378,7 @@ useIntersection(sectionRef, () => {
 
         .project-image {
           width: 100%;
-          height: 180px;
+          height: 140px;
           overflow: hidden;
 
           img {
@@ -387,7 +394,7 @@ useIntersection(sectionRef, () => {
         }
 
         .project-info {
-          padding: 20px;
+          padding: 15px;
 
           .project-badge {
             display: inline-block;
@@ -403,7 +410,7 @@ useIntersection(sectionRef, () => {
           .project-title {
             font-size: clamp(14px, 3vw, 16px);
             line-height: 1.6;
-            color: $text-dark;
+            color: white;
             font-weight: 500;
           }
         }
@@ -417,8 +424,8 @@ useIntersection(sectionRef, () => {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.2);
-    box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.4), 0 0 30px rgba(251, 191, 36, 0.6);
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.4), 0 0 20px rgba(251, 191, 36, 0.6);
   }
 }
 
@@ -427,27 +434,27 @@ useIntersection(sectionRef, () => {
   .section-2 {
     .timeline-vertical {
       .timeline-node {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
 
         .timeline-card {
           width: 85%;
           max-width: 100%;
 
           .card-image {
-            height: 140px;
+            height: 80px;
           }
 
           .card-content {
-            padding: 15px;
+            padding: 10px;
 
             h4 {
-              font-size: 14px;
-              margin-bottom: 8px;
+              font-size: 13px;
+              margin-bottom: 5px;
             }
 
             p {
-              font-size: 12px;
-              min-height: 36px;
+              font-size: 11px;
+              min-height: 26px;
             }
           }
         }

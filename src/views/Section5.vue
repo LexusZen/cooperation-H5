@@ -69,28 +69,17 @@ useIntersection(sectionRef, () => {
 .section-5 {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, rgb(229, 238, 255), #b4d8e8);
+  background: rgb(37, 32, 126);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 80px 20px 60px;
 
   .content {
     max-width: 100%;
     width: 100%;
   }
 
-  .section-title {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(22, 93, 255);
-    margin-bottom: 25px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 0 10px;
-    opacity: 1;
-  }
 
   .highlights-container {
     display: flex;
@@ -102,8 +91,9 @@ useIntersection(sectionRef, () => {
 
   // 每个小标题卡片（移动端优先，左文右小图）
   .highlight-card {
-    background: rgba(229, 238, 255, 0.95);
+    background: rgba(229, 238, 255, 0.5);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -145,7 +135,7 @@ useIntersection(sectionRef, () => {
       .highlight-description {
         flex: 1;
         font-size: 14px;
-        color: #4b5563;
+        color: white;
         line-height: 1.6; // 更紧凑的行高
         text-align: justify;
         margin: 0;
@@ -181,14 +171,6 @@ useIntersection(sectionRef, () => {
 
   // 平板适配（480px以上）
   @media (min-width: 480px) {
-    padding-left: 20px;
-    padding-right: 20px;
-
-    .section-title {
-      font-size: 32px;
-      margin-bottom: 30px;
-    }
-
     .highlights-container {
       gap: 22px;
       padding: 0 15px;
@@ -224,16 +206,8 @@ useIntersection(sectionRef, () => {
 
   // PC端适配（768px以上）
   @media (min-width: 768px) {
-    padding-left: 30px;
-    padding-right: 30px;
-
     .content {
       max-width: 1200px;
-    }
-
-    .section-title {
-      font-size: 38px;
-      margin-bottom: 40px;
     }
 
     .highlights-container {
@@ -271,14 +245,6 @@ useIntersection(sectionRef, () => {
 
   // 大屏优化（1024px以上）
   @media (min-width: 1024px) {
-    padding-left: 40px;
-    padding-right: 40px;
-
-    .section-title {
-      font-size: 44px;
-      margin-bottom: 50px;
-    }
-
     .highlights-container {
       gap: 32px;
     }
@@ -306,6 +272,86 @@ useIntersection(sectionRef, () => {
       .image-section {
         .image-wrapper {
           width: 180px;
+        }
+      }
+    }
+  }
+
+  // 移动端专属优化 (max-width: 768px)
+  @media (max-width: 768px) {
+    .content {
+      padding: 0;
+    }
+
+    .highlights-container {
+      gap: 16px;
+      padding: 0 8px;
+    }
+
+    .highlight-card {
+      padding: 14px 12px;
+      gap: 10px;
+      border-radius: 10px;
+
+      .text-section {
+        gap: 8px;
+
+        .number-badge {
+          width: 36px;
+          height: 36px;
+          min-width: 36px;
+          font-size: 16px;
+          border-radius: 6px;
+        }
+
+        .highlight-description {
+          font-size: 13px;
+          line-height: 1.55;
+        }
+      }
+
+      .image-section {
+        .image-wrapper {
+          width: 100px;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+
+  // 超小屏幕优化 (max-width: 480px)
+  @media (max-width: 480px) {
+    .highlights-container {
+      gap: 14px;
+      padding: 0 5px;
+    }
+
+    .highlight-card {
+      padding: 12px 10px;
+      gap: 8px;
+      border-radius: 8px;
+
+      .text-section {
+        gap: 6px;
+
+        .number-badge {
+          width: 32px;
+          height: 32px;
+          min-width: 32px;
+          font-size: 14px;
+          border-radius: 6px;
+        }
+
+        .highlight-description {
+          font-size: 12px;
+          line-height: 1.5;
+        }
+      }
+
+      .image-section {
+        .image-wrapper {
+          width: 85px;
+          border-radius: 6px;
         }
       }
     }

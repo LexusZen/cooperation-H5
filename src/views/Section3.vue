@@ -16,7 +16,6 @@
         >
           <!-- 模块标题 -->
           <div class="module-header">
-            <span class="module-icon">{{ module.icon }}</span>
             <h3 class="module-title">{{ module.title }}</h3>
           </div>
 
@@ -85,7 +84,6 @@
         <div class="tooltip-content" @click.stop>
           <button class="close-btn" @click="activeBar = null">×</button>
           <div class="tooltip-header">
-            <span class="tooltip-icon">{{ activeBar.icon }}</span>
             <h4>{{ activeBar.title }}</h4>
           </div>
           <p class="tooltip-year">{{ activeBar.year }}</p>
@@ -287,10 +285,9 @@ const animateBars = (moduleIndex: number) => {
   width: 100%;
   min-height: 100vh;
   color: white;
-  padding: 60px 20px;
+  padding: 80px 20px 60px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
   .bg-image {
     position: absolute;
@@ -309,7 +306,7 @@ const animateBars = (moduleIndex: number) => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(37, 32, 126, 0.85);
     }
   }
 
@@ -318,32 +315,52 @@ const animateBars = (moduleIndex: number) => {
     z-index: 1;
     max-width: 1200px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0 auto;
   }
 
-  .section-title {
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    margin-bottom: 40px;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  }
 
   // 柱状图模块容器（纵向排列）
   .chart-modules {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    flex: 1;
+    overflow-y: auto; // 允许滚动
+    overflow-x: hidden;
+
+    // 自定义滚动条
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(16, 224, 248, 0.5);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(16, 224, 248, 0.7);
+      }
+    }
 
     @media (max-width: 768px) {
-      gap: 15px;
+      gap: 12px;
     }
 
     // 单个模块
     .chart-module {
-      background: rgba(229, 238, 255, 0.95);
-      border-radius: 20px;
-      padding: 20px;
+      background: rgba(229, 238, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 15px;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       opacity: 0;
       transform: translateY(30px);
@@ -355,27 +372,19 @@ const animateBars = (moduleIndex: number) => {
       }
 
       @media (max-width: 768px) {
-        padding: 15px;
-        min-height: calc((100vh - 180px) / 3);
+        padding: 12px;
         display: flex;
         flex-direction: column;
       }
 
       // 模块头部
       .module-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 15px;
-
-        .module-icon {
-          font-size: 28px;
-        }
+        margin-bottom: 12px;
 
         .module-title {
-          font-size: clamp(18px, 3vw, 22px);
+          font-size: clamp(16px, 2.8vw, 20px);
           font-weight: bold;
-          color: rgb(22, 93, 255);
+          color: rgb(16, 224, 248);
           margin: 0;
         }
       }
@@ -406,14 +415,14 @@ const animateBars = (moduleIndex: number) => {
               display: flex;
               justify-content: space-around;
               align-items: flex-end;
-              height: 180px;
-              gap: 10px;
-              padding: 0 10px;
+              height: 130px;
+              gap: 8px;
+              padding: 0 8px;
               border-bottom: 3px solid #e5e7eb;
               position: relative;
 
               @media (max-width: 768px) {
-                height: 140px;
+                height: 110px;
                 gap: 6px;
                 padding: 0 5px;
               }
@@ -494,7 +503,7 @@ const animateBars = (moduleIndex: number) => {
                   margin-top: 8px;
                   font-size: clamp(11px, 2vw, 13px);
                   font-weight: 600;
-                  color: #1f2937;
+                  color: white;
 
                   @media (max-width: 768px) {
                     margin-top: 6px;
@@ -524,16 +533,16 @@ const animateBars = (moduleIndex: number) => {
             width: 100%;
 
             .description {
-              font-size: clamp(12px, 2.2vw, 14px);
-              color: #1f2937;
-              line-height: 1.7;
+              font-size: clamp(11px, 2vw, 13px);
+              color: white;
+              line-height: 1.6;
               text-align: justify;
-              margin-bottom: 12px;
+              margin-bottom: 10px;
 
               @media (max-width: 768px) {
-                font-size: 11px;
-                line-height: 1.6;
-                margin-bottom: 8px;
+                font-size: 10px;
+                line-height: 1.5;
+                margin-bottom: 6px;
               }
             }
 
@@ -541,14 +550,14 @@ const animateBars = (moduleIndex: number) => {
             .highlights {
               display: flex;
               flex-direction: column;
-              gap: 6px;
+              gap: 4px;
 
               .highlight-item {
                 display: flex;
                 align-items: flex-start;
                 gap: 8px;
                 font-size: clamp(10px, 2vw, 12px);
-                color: #4b5563;
+                color: rgba(255, 255, 255, 0.9);
                 line-height: 1.5;
 
                 @media (max-width: 768px) {
@@ -587,7 +596,9 @@ const animateBars = (moduleIndex: number) => {
     z-index: 1000;
 
     .tooltip-content {
-      background: rgba(229, 238, 255, 0.95);
+      background: rgba(229, 238, 255, 0.6);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       border-radius: 20px;
       padding: 35px;
       max-width: 500px;
@@ -625,19 +636,13 @@ const animateBars = (moduleIndex: number) => {
       }
 
       .tooltip-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
         margin-bottom: 15px;
-
-        .tooltip-icon {
-          font-size: 32px;
-        }
 
         h4 {
           font-size: clamp(18px, 3vw, 22px);
           font-weight: bold;
-          color: rgb(22, 93, 255);
+          color: rgb(16, 224, 248);
+          text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
           margin: 0;
         }
       }
@@ -645,20 +650,22 @@ const animateBars = (moduleIndex: number) => {
       .tooltip-year {
         font-size: 16px;
         font-weight: 600;
-        color: #6b7280;
+        color: rgb(16, 224, 248);
+        text-shadow: 0 0 10px rgba(16, 224, 248, 0.5);
         margin-bottom: 10px;
       }
 
       .tooltip-value {
         font-size: clamp(28px, 5vw, 36px);
         font-weight: bold;
-        color: #1f2937;
+        color: rgb(16, 224, 248);
+        text-shadow: 0 0 20px rgba(16, 224, 248, 0.5);
         margin-bottom: 15px;
       }
 
       .tooltip-detail {
         font-size: clamp(14px, 2.5vw, 16px);
-        color: #4b5563;
+        color: white;
         line-height: 1.8;
       }
     }

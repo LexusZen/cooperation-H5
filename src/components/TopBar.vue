@@ -40,17 +40,14 @@
   }
 
   .text-section {
-    animation: floatUpDown 3s ease-in-out infinite 0.5s;
+    animation: floatUpDown 3s ease-in-out infinite;
 
     .title {
       font-size: 18px;
       font-weight: bold;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: rgb(16, 224, 248);
       letter-spacing: 2px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
       font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
     }
   }

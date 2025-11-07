@@ -49,18 +49,17 @@ defineProps<{
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: rgb(229, 238, 255);
-  padding: 20px;
+  background: rgb(37, 32, 126);
+  padding: 10px;
 
   // 画布容器
   .canvas-container {
     width: 100%;
     max-width: 1200px;
-    height: calc(100vh - 130px); // 减去顶部20px + 底部导航90px + 额外20px
+    height: calc(100vh - 110px); // 减去顶部10px + 底部导航90px + 额外10px
     max-height: 900px;
-    background: rgb(229, 238, 255);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -86,7 +85,8 @@ defineProps<{
   .info-section {
     width: 100%;
     height: 35%;
-    background: rgb(229, 238, 255);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -135,13 +135,13 @@ defineProps<{
         .name {
           font-size: 24px;
           font-weight: bold;
-          color: #1f2937;
+          color: white;
           margin: 0 0 6px 0;
         }
 
         .role {
           font-size: 15px;
-          color: #4b5563;
+          color: rgba(255, 255, 255, 0.8);
           margin: 0;
           font-weight: 500;
           line-height: 1.4;
@@ -160,12 +160,12 @@ defineProps<{
       .quote-text {
         font-size: 15px;
         line-height: 1.8;
-        color: #1f2937;
+        color: white;
         margin: 0;
         text-align: justify;
         position: relative;
         padding-left: 15px;
-        border-left: 3px solid rgba(102, 126, 234, 0.4);
+        border-left: 3px solid rgba(16, 224, 248, 0.5);
 
         &::before {
           content: '"';
@@ -183,11 +183,11 @@ defineProps<{
 
   // 平板适配（480px以上）
   @media (min-width: 480px) {
-    padding: 25px;
+    padding: 12px;
 
     .canvas-container {
-      height: calc(100vh - 145px); // 减去顶部25px + 底部导航95px + 额外25px
-      border-radius: 24px;
+      height: calc(100vh - 116px); // 减去顶部12px + 底部导航95px + 额外9px
+      border-radius: 18px;
     }
 
     .background-section {
@@ -232,11 +232,11 @@ defineProps<{
 
   // PC端适配（768px以上）
   @media (min-width: 768px) {
-    padding: 30px;
+    padding: 15px;
 
     .canvas-container {
-      height: calc(100vh - 160px); // 减去顶部30px + 底部导航100px + 额外30px
-      border-radius: 28px;
+      height: calc(100vh - 130px); // 减去顶部15px + 底部导航100px + 额外15px
+      border-radius: 20px;
     }
 
     .background-section {

@@ -48,6 +48,29 @@ img {
   display: block;
 }
 
+// 板块标题统一样式
+.section-title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: bold;
+  text-align: center;
+  color: rgb(16, 224, 248);
+  text-shadow: 0 0 20px rgba(16, 224, 248, 0.5);
+  margin-bottom: 60px;
+  letter-spacing: 2px;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+    padding: 0 15px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 30px;
+    padding: 0 10px;
+    letter-spacing: 1px;
+  }
+}
+
 // 滚动条样式
 ::-webkit-scrollbar {
   width: 6px;
@@ -191,10 +214,10 @@ img {
     .text {
       flex: 1;
       font-size: clamp(13px, 2.5vw, 16px);
-      color: #1f2937;
+      color: white;
       line-height: 1.7;
       font-weight: 600;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
   }
 }

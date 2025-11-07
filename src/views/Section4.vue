@@ -205,43 +205,28 @@ useIntersection(sectionRef, () => {
 .section-4 {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, rgb(229, 238, 255), #b4d8e8);
+  background: rgb(37, 32, 126);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 80px 20px 60px;
 
   .content {
     max-width: 1200px;
     width: 100%;
   }
 
-  .section-title {
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: bold;
-    text-align: center;
-    color: rgb(22, 93, 255);
-    margin-bottom: 40px;
-  }
 
   // 民生设施轮播容器
   .carousel-container {
-    background: rgba(248, 250, 252, 0.85);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     margin-bottom: 30px;
 
-    @media (max-width: 768px) {
-      padding: 20px 15px;
-    }
-
     .carousel-title {
-      font-size: clamp(20px, 3.5vw, 26px);
+      font-size: clamp(18px, 3vw, 22px);
       font-weight: bold;
-      color: rgb(22, 93, 255);
-      margin-bottom: 25px;
+      color: rgb(16, 224, 248);
+      text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
+      margin-bottom: 20px;
       text-align: center;
     }
 
@@ -261,12 +246,12 @@ useIntersection(sectionRef, () => {
         .facility-image {
           border-radius: 16px 16px 0 0;
           overflow: hidden;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 
           img {
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 20 / 9;
             object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
@@ -279,28 +264,28 @@ useIntersection(sectionRef, () => {
 
         // 标题（图片下方）
         .facility-caption {
-          background: linear-gradient(to bottom,
-            rgba(255, 255, 255, 0.95),
-            rgba(248, 250, 252, 0.95)
-          );
-          backdrop-filter: blur(10px);
-          padding: 20px;
+          background: rgba(229, 238, 255, 0.6);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          padding: 18px;
           border-radius: 0 0 16px 16px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 
           h4 {
-            font-size: clamp(18px, 3vw, 22px);
+            font-size: clamp(16px, 2.8vw, 19px);
             font-weight: bold;
-            color: rgb(22, 93, 255);
-            margin-bottom: 10px;
+            color: rgb(16, 224, 248);
+            text-shadow: 0 0 10px rgba(16, 224, 248, 0.4);
+            margin-bottom: 8px;
             text-align: center;
           }
 
           .caption-text {
-            font-size: clamp(13px, 2.5vw, 15px);
-            color: #4b5563;
+            font-size: clamp(12px, 2.2vw, 14px);
+            color: white;
             line-height: 1.6;
             text-align: center;
-            min-height: 48px;
+            min-height: 40px;
           }
         }
       }
@@ -326,21 +311,14 @@ useIntersection(sectionRef, () => {
 
   // 交通路网容器
   .transport-container {
-    background: rgba(248, 250, 252, 0.85);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-
-    @media (max-width: 768px) {
-      padding: 20px 15px;
-    }
+    margin-bottom: 20px;
 
     .transport-title {
-      font-size: clamp(20px, 3.5vw, 26px);
+      font-size: clamp(18px, 3vw, 22px);
       font-weight: bold;
-      color: rgb(22, 93, 255);
-      margin-bottom: 25px;
+      color: rgb(16, 224, 248);
+      text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
+      margin-bottom: 20px;
       text-align: center;
     }
 
@@ -358,7 +336,7 @@ useIntersection(sectionRef, () => {
         .transport-image {
           border-radius: 16px 16px 0 0;
           overflow: hidden;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 
           img {
             width: 100%;
@@ -376,25 +354,25 @@ useIntersection(sectionRef, () => {
 
         // 标题（图片下方）
         .transport-caption {
-          background: linear-gradient(to bottom,
-            rgba(255, 255, 255, 0.95),
-            rgba(248, 250, 252, 0.95)
-          );
-          backdrop-filter: blur(10px);
+          background: rgba(229, 238, 255, 0.6);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
           padding: 20px;
           border-radius: 0 0 16px 16px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 
           h4 {
             font-size: clamp(18px, 3vw, 22px);
             font-weight: bold;
-            color: rgb(22, 93, 255);
+            color: rgb(16, 224, 248);
+            text-shadow: 0 0 10px rgba(16, 224, 248, 0.4);
             margin-bottom: 10px;
             text-align: center;
           }
 
           .caption-text {
             font-size: clamp(13px, 2.5vw, 15px);
-            color: #4b5563;
+            color: white;
             line-height: 1.6;
             text-align: center;
             min-height: 48px;
@@ -436,7 +414,9 @@ useIntersection(sectionRef, () => {
     animation: fadeIn 0.3s ease;
 
     .modal-content {
-      background: rgba(229, 238, 255, 0.95);
+      background: rgba(229, 238, 255, 0.6);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       border-radius: 20px;
       padding: 40px;
       max-width: 600px;
@@ -476,20 +456,22 @@ useIntersection(sectionRef, () => {
       h3 {
         font-size: clamp(20px, 4vw, 26px);
         font-weight: bold;
-        color: rgb(22, 93, 255);
+        color: rgb(16, 224, 248);
+        text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
         margin-bottom: 15px;
       }
 
       .subtitle {
         font-size: clamp(16px, 3vw, 18px);
         font-weight: 600;
-        color: #f59e0b;
+        color: rgb(16, 224, 248);
+        text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
         margin-bottom: 20px;
       }
 
       .description {
         font-size: clamp(14px, 2.5vw, 16px);
-        color: #4b5563;
+        color: white;
         line-height: 1.8;
       }
     }
@@ -519,25 +501,20 @@ useIntersection(sectionRef, () => {
 // 小屏手机优化
 @media (max-width: 480px) {
   .section-4 {
-    .carousel-container,
-    .transport-container {
-      padding: 15px 10px;
+    .facility-card,
+    .transport-card {
+      .facility-caption,
+      .transport-caption {
+        padding: 15px;
 
-      .facility-card,
-      .transport-card {
-        .facility-caption,
-        .transport-caption {
-          padding: 15px;
+        h4 {
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
 
-          h4 {
-            font-size: 16px;
-            margin-bottom: 8px;
-          }
-
-          .caption-text {
-            font-size: 12px;
-            min-height: 40px;
-          }
+        .caption-text {
+          font-size: 12px;
+          min-height: 40px;
         }
       }
     }

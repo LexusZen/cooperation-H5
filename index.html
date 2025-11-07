@@ -7,23 +7,34 @@
     <meta name="description" content="深汕特别合作区 - 山海新城，产业高地" />
     <meta name="keywords" content="深汕,特别合作区,产业发展,宜居宜业" />
     <title>深汕特别合作区 - 山海新城 产业高地</title>
-    <!-- 移动端适配脚本 - 确保不同屏幕文字大小一致 -->
+    <!-- 移动端适配脚本 -->
     <script>
       (function() {
         function setRem() {
-          // 基准宽度为 375px (iPhone 6/7/8)
-          const baseWidth = 375;
-          // 获取当前屏幕宽度
-          const clientWidth = document.documentElement.clientWidth || window.innerWidth;
-          // 限制最大宽度为750px,避免在大屏上文字过大
-          const width = Math.min(clientWidth, 750);
-          // 计算根字体大小 (375px = 100px, 750px = 200px)
-          const rem = (width / baseWidth) * 100;
-          document.documentElement.style.fontSize = rem + 'px';
+          const doc = document.documentElement;
+          const clientWidth = doc.clientWidth;
+
+          // 不同屏幕尺寸使用不同的基准
+          if (clientWidth <= 750) {
+            // 移动端：基准宽度 375px，1rem = 37.5px
+            // 这样 10rem = 375px，方便计算
+            const rem = clientWidth / 10;
+            doc.style.fontSize = rem + 'px';
+          } else {
+            // PC端：保持 16px 的默认字体大小
+            doc.style.fontSize = '16px';
+          }
         }
+
         setRem();
         window.addEventListener('resize', setRem);
         window.addEventListener('orientationchange', setRem);
+        // 页面显示时也执行一次
+        window.addEventListener('pageshow', function(e) {
+          if (e.persisted) {
+            setRem();
+          }
+        });
       })();
     </script>
   </head>

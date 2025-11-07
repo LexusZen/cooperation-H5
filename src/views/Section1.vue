@@ -5,7 +5,6 @@
       <div v-if="currentStage === 1" class="welcome-screen">
         <div class="welcome-content">
           <h1 class="welcome-title">深汕焕新 奋战百千万</h1>
-          <p class="welcome-subtitle">Shenzhen-Shanwei Special Cooperation Zone</p>
           <div class="loading-bar">
             <div class="loading-progress" :style="{ width: loadingProgress + '%' }"></div>
           </div>
@@ -21,7 +20,12 @@
           <div class="panorama-overlay"></div>
           <div class="panorama-title">
             <h2>深汕焕新 奋战百千万</h2>
-            <p>山海新城·产业高地</p>
+            <!-- 序言打字机动画 -->
+            <div class="panorama-preface">
+              <p class="preface-line" v-for="(_line, index) in prefaceLines" :key="index" :class="{ visible: visiblePanoramaPreface >= index }">
+                {{ displayPanoramaPreface[index] || '' }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -61,29 +65,7 @@
         <div class="bg-image" :style="{ backgroundImage: `url(${getImageUrl('/images/section1/bg-main.jpg')})` }"></div>
 
         <div class="content">
-          <h1 class="main-title">深汕焕新 奋战百千万</h1>
-
-          <!-- 序言部分 -->
-          <div class="preface-section">
-            <div class="preface-line" :class="{ visible: visiblePreface >= 0 }">
-              <span class="preface-text">{{ displayPreface[0] || '' }}</span>
-            </div>
-            <div class="preface-line" :class="{ visible: visiblePreface >= 1 }">
-              <span class="preface-text">{{ displayPreface[1] || '' }}</span>
-            </div>
-            <div class="preface-line" :class="{ visible: visiblePreface >= 2 }">
-              <span class="preface-text">{{ displayPreface[2] || '' }}</span>
-            </div>
-            <div class="preface-line" :class="{ visible: visiblePreface >= 3 }">
-              <span class="preface-text">{{ displayPreface[3] || '' }}</span>
-            </div>
-            <div class="preface-line" :class="{ visible: visiblePreface >= 4 }">
-              <span class="preface-text">{{ displayPreface[4] || '' }}</span>
-            </div>
-            <div class="preface-line" :class="{ visible: visiblePreface >= 5 }">
-              <span class="preface-text">{{ displayPreface[5] || '' }}</span>
-            </div>
-          </div>
+          <h2 class="section-title">深汕焕新 奋战百千万</h2>
 
           <!-- 小标题列表 -->
           <div class="highlights-section">
@@ -123,8 +105,10 @@ const currentStage = ref(1)
 const loadingProgress = ref(0)
 
 // Content display
-const displayPreface = ref<string[]>(['', '', '', '', '', ''])
-const visiblePreface = ref(-1)
+// 全景阶段序言
+const displayPanoramaPreface = ref<string[]>(['', '', '', '', ''])
+const visiblePanoramaPreface = ref(-1)
+// 主内容阶段数据
 const displayHighlights = ref<string[]>([])
 const visibleHighlights = ref(-1)
 
@@ -134,8 +118,7 @@ const cubeModules = [Autoplay]
 const prefaceLines = [
   '这里，是"百千万工程"的实践热土；',
   '这里，以车兴产、以产促城、产城融合、以工哺农；',
-  '于山海之间，',
-  '崛起一座汽车新城，',
+  '于山海之间，崛起一座汽车新城，',
   '绘就了区域协调新画卷。'
 ]
 
@@ -185,12 +168,29 @@ const startStage1 = () => {
   }, 30) // 100% in 3 seconds (100 * 30ms = 3000ms)
 }
 
-// Stage 2: Panorama Display (3-6s)
+// Stage 2: Panorama Display (with preface animation)
 const startStage2 = () => {
   currentStage.value = 2
+
+  // 序言打字机效果
+  setTimeout(() => {
+    prefaceLines.forEach((line, index) => {
+      setTimeout(() => {
+        visiblePanoramaPreface.value = index
+
+        setTimeout(() => {
+          typeText(line, (text) => {
+            displayPanoramaPreface.value[index] = text
+          }, { speed: 40 })
+        }, 100)
+      }, index * 800)
+    })
+  }, 500)
+
+  // 序言完成后进入轮播阶段
   setTimeout(() => {
     startStage3()
-  }, 3000) // 3s for panorama
+  }, prefaceLines.length * 800 + 2000) // 等待序言完成后2秒
 }
 
 // Stage 3: Slide Carousel (6-~13.5s, plays once)
@@ -216,22 +216,7 @@ const onCarouselEnd = () => {
 const enterPage = () => {
   currentStage.value = 4
 
-  // 序言打字机效果
-  setTimeout(() => {
-    prefaceLines.forEach((line, index) => {
-      setTimeout(() => {
-        visiblePreface.value = index
-
-        setTimeout(() => {
-          typeText(line, (text) => {
-            displayPreface.value[index] = text
-          }, { speed: 40 })
-        }, 100)
-      }, index * 800)
-    })
-  }, 500)
-
-  // 小标题列表打字机效果 (在序言之后)
+  // 小标题列表打字机效果
   setTimeout(() => {
     highlights.forEach((highlight, index) => {
       setTimeout(() => {
@@ -244,7 +229,7 @@ const enterPage = () => {
         }, 300)
       }, index * 800)
     })
-  }, prefaceLines.length * 800 + 1000) // 序言完成后1秒开始
+  }, 500)
 }
 
 onMounted(() => {
@@ -273,7 +258,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  background: rgb(37, 32, 126);
   z-index: 10;
 
   .welcome-content {
@@ -286,10 +271,8 @@ onMounted(() => {
       font-weight: bold;
       margin-bottom: 15px;
       letter-spacing: 3px;
-      background: linear-gradient(135deg, #60a5fa, #3b82f6, #2563eb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: rgb(16, 224, 248);
+      text-shadow: 0 0 20px rgba(16, 224, 248, 0.5);
     }
 
     .welcome-subtitle {
@@ -349,25 +332,36 @@ onMounted(() => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(37, 32, 126, 0.6);
     }
 
     .panorama-title {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, calc(-50% - 40px));
+      transform: translate(-50%, calc(-50% - 220px));
       text-align: center;
       color: white;
       z-index: 1;
       animation: panoramaTitleFadeIn 1s ease 0.5s both;
+      width: 90%;
+      max-width: 1200px;
 
       h2 {
         font-size: clamp(36px, 7vw, 64px);
         font-weight: bold;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         letter-spacing: 4px;
-        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        color: rgb(16, 224, 248);
+        text-shadow: 0 0 25px rgba(16, 224, 248, 0.6);
+        white-space: nowrap;
+
+        @media (max-width: 768px) {
+          white-space: normal;
+          font-size: clamp(28px, 8vw, 48px);
+          letter-spacing: 2px;
+          line-height: 1.4;
+        }
       }
 
       p {
@@ -375,6 +369,43 @@ onMounted(() => {
         letter-spacing: 2px;
         opacity: 0.9;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .panorama-preface {
+        margin-top: 25px;
+
+        @media (max-width: 768px) {
+          margin-top: 15px;
+          padding: 0 10px;
+        }
+
+        .preface-line {
+          font-size: clamp(16px, 3vw, 24px);
+          line-height: 1.8;
+          letter-spacing: 2px;
+          color: white;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          transform: translateY(10px);
+          transition: all 0.5s ease;
+          min-height: 1.8em;
+
+          @media (max-width: 768px) {
+            font-size: clamp(14px, 4vw, 20px);
+            line-height: 1.6;
+            letter-spacing: 1px;
+          }
+
+          &.visible {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+
+      @media (max-width: 768px) {
+        transform: translate(-50%, calc(-50% - 120px));
+        width: 95%;
       }
     }
   }
@@ -390,7 +421,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, rgb(229, 238, 255), #b4d8e8);
+  background: rgb(37, 32, 126);
   z-index: 8;
 
   .cube-carousel-container {
@@ -414,10 +445,12 @@ onMounted(() => {
         position: relative;
         width: 100%;
         height: 100%;
-        background: rgba(229, 238, 255, 0.95);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         transform: translate3d(0, 0, 0);
         will-change: transform;
 
@@ -471,7 +504,7 @@ onMounted(() => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(37, 32, 126, 0.7);
     }
   }
 
@@ -479,36 +512,27 @@ onMounted(() => {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 20px 20px 40px; // 顶部减少20px,向上移动
+    padding: 80px 20px 40px; // 顶部留足空间给TopBar
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: -40px; // 整体向上移动40px
+    min-height: 100vh;
 
     @media (max-width: 768px) {
-      padding: 15px 15px 30px;
-      margin-top: -30px; // 移动端向上移动30px
+      padding: 80px 20px 40px; // 移动端保持一致
     }
   }
 
-  .main-title {
-    font-size: clamp(28px, 5vw, 48px);
-    font-weight: bold;
-    margin-bottom: 30px;
-    letter-spacing: 2px;
-    padding: 0 10px;
-    color: rgb(22, 93, 255);
-    text-shadow: 0 2px 10px rgba(22, 93, 255, 0.3);
-  }
 
   // 序言区域
   .preface-section {
     max-width: 800px;
     margin: 0 auto 40px;
     padding: 25px;
-    background: linear-gradient(135deg, rgba(229, 238, 255, 0.95) 0%, rgba(229, 238, 255, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(229, 238, 255, 0.6) 0%, rgba(229, 238, 255, 0.5) 100%);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -521,7 +545,7 @@ onMounted(() => {
     .preface-line {
       font-size: clamp(15px, 3vw, 20px);
       line-height: 2;
-      color: #1f2937;
+      color: white;
       text-align: center;
       opacity: 0;
       transform: translateY(10px);
@@ -553,32 +577,16 @@ onMounted(() => {
     padding: 0 20px;
 
     .highlights-grid {
-      background: linear-gradient(135deg, rgba(229, 238, 255, 0.98) 0%, rgba(229, 238, 255, 0.95) 100%);
-      backdrop-filter: blur(15px);
-      border-radius: 24px;
+      background: transparent;
       padding: 35px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(229, 238, 255, 0.8);
-      border: 1px solid rgba(229, 238, 255, 0.6);
       position: relative;
       overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(22, 93, 255, 0.08), transparent);
-        animation: shimmerSlide 3s infinite;
-      }
 
       .highlight-item {
         display: flex;
         align-items: center;
         gap: 15px;
         padding: 15px 10px;
-        border-bottom: 1px solid rgba(22, 93, 255, 0.08);
         position: relative;
         transition: all 0.3s ease;
         opacity: 0;
@@ -590,7 +598,6 @@ onMounted(() => {
         }
 
         &:hover {
-          background: rgba(22, 93, 255, 0.05);
           transform: translateX(8px);
           padding-left: 18px;
         }
@@ -625,11 +632,12 @@ onMounted(() => {
 
         .text {
           flex: 1;
-          font-size: clamp(13px, 2.5vw, 16px);
-          color: #1f2937;
+          font-size: clamp(18px, 3vw, 22px);
+          color: white;
           line-height: 1.7;
-          font-weight: 500;
+          font-weight: 600;
           min-height: 22px;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
       }
     }
@@ -650,7 +658,7 @@ onMounted(() => {
           }
 
           .text {
-            font-size: clamp(12px, 3vw, 14px);
+            font-size: clamp(15px, 3.5vw, 18px);
           }
         }
       }

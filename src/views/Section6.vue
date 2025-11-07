@@ -71,11 +71,11 @@ useIntersection(sectionRef, () => {
 .section-6 {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, rgb(229, 238, 255), #b4d8e8);
+  background: rgb(37, 32, 126);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 15px;
+  padding: 80px 20px 60px;
   position: relative;
 
   .content {
@@ -85,15 +85,6 @@ useIntersection(sectionRef, () => {
     z-index: 1;
   }
 
-  .section-title {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    letter-spacing: 2px;
-  }
 
   // 目标列表
   .goals-list {
@@ -107,39 +98,15 @@ useIntersection(sectionRef, () => {
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      background: linear-gradient(135deg, rgba(229, 238, 255, 0.98) 0%, rgba(229, 238, 255, 0.95) 100%);
-      backdrop-filter: blur(15px);
+      background: transparent;
       padding: 20px 18px;
       border-radius: 16px;
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
       transition: all 0.5s ease;
       position: relative;
       overflow: hidden;
-      perspective: 1000px;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
-        transform: translate(-50%, -50%) scale(0);
-        border-radius: 50%;
-        transition: transform 0.6s ease;
-      }
 
       &:hover {
-        background: linear-gradient(135deg, rgba(229, 238, 255, 1) 0%, rgba(229, 238, 255, 1) 100%);
-        transform: translateX(8px) rotateY(5deg);
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25), 0 0 20px rgba(102, 126, 234, 0.3);
-        border-color: rgba(102, 126, 234, 0.4);
-
-        &::before {
-          transform: translate(-50%, -50%) scale(2);
-        }
+        transform: translateX(8px);
       }
 
       .goal-number {
@@ -177,7 +144,7 @@ useIntersection(sectionRef, () => {
       .goal-text {
         flex: 1;
         font-size: 14px;
-        color: #1f2937;
+        color: white;
         line-height: 1.7;
         margin: 0;
       }
@@ -201,7 +168,8 @@ useIntersection(sectionRef, () => {
     .image-caption {
       text-align: center;
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgb(16, 224, 248);
+      text-shadow: 0 0 15px rgba(16, 224, 248, 0.5);
       font-weight: 500;
     }
   }
@@ -239,22 +207,79 @@ useIntersection(sectionRef, () => {
     .slogan {
       font-size: 20px;
       font-weight: bold;
-      color: #fbbf24;
+      color: rgb(16, 224, 248);
       letter-spacing: 3px;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 0 20px rgba(16, 224, 248, 0.5);
       margin: 0;
+    }
+  }
+
+  // 移动端优化（768px以下）
+  @media (max-width: 768px) {
+    .goals-list {
+      gap: 12px;
+      margin-bottom: 25px;
+      padding: 0 5px;
+
+      .goal-item {
+        padding: 14px 12px;
+        gap: 10px;
+        border-radius: 12px;
+
+        &:hover {
+          transform: translateX(4px) rotateY(2deg);
+        }
+
+        .goal-number {
+          width: 36px;
+          height: 36px;
+          min-width: 36px;
+          font-size: 16px;
+          border-radius: 10px;
+        }
+
+        .goal-text {
+          font-size: 12px;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    .city-design {
+      margin-bottom: 25px;
+      padding: 0 5px;
+
+      img {
+        height: 180px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+      }
+
+      .image-caption {
+        font-size: 12px;
+      }
+    }
+
+    .footer-section {
+      padding: 25px 15px 15px;
+
+      .logo-wrapper {
+        margin-bottom: 15px;
+
+        .logo {
+          max-width: 140px;
+        }
+      }
+
+      .slogan {
+        font-size: 16px;
+        letter-spacing: 2px;
+      }
     }
   }
 
   // 平板适配（480px以上）
   @media (min-width: 480px) {
-    padding: 50px 20px;
-
-    .section-title {
-      font-size: 36px;
-      margin-bottom: 35px;
-    }
-
     .goals-list {
       gap: 18px;
       margin-bottom: 35px;
@@ -306,15 +331,8 @@ useIntersection(sectionRef, () => {
 
   // PC端适配（768px以上）
   @media (min-width: 768px) {
-    padding: 60px 30px;
-
     .content {
       max-width: 1200px;
-    }
-
-    .section-title {
-      font-size: 42px;
-      margin-bottom: 45px;
     }
 
     .goals-list {
@@ -369,13 +387,6 @@ useIntersection(sectionRef, () => {
 
   // 大屏优化（1024px以上）
   @media (min-width: 1024px) {
-    padding: 80px 40px;
-
-    .section-title {
-      font-size: 48px;
-      margin-bottom: 55px;
-    }
-
     .goals-list {
       gap: 25px;
       margin-bottom: 55px;

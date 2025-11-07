@@ -229,9 +229,9 @@ const onSlideChange = (swiper: any) => {
     justify-content: center;
     align-items: center;
     padding: 20px 0;
-    background: linear-gradient(to top, rgba(173, 216, 230, 0.85), rgba(173, 216, 230, 0.75));
+    background: rgb(37, 32, 126);
     backdrop-filter: blur(15px);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.4);
 
     // 左右留白效果
     &::before,
@@ -246,12 +246,12 @@ const onSlideChange = (swiper: any) => {
 
     &::before {
       left: 0;
-      background: linear-gradient(to right, rgba(173, 216, 230, 0.85), transparent);
+      background: linear-gradient(to right, rgb(37, 32, 126), transparent);
     }
 
     &::after {
       right: 0;
-      background: linear-gradient(to left, rgba(173, 216, 230, 0.85), transparent);
+      background: linear-gradient(to left, rgb(37, 32, 126), transparent);
     }
 
     .swiper-pagination-bullet {
@@ -288,7 +288,9 @@ const onSlideChange = (swiper: any) => {
       &.swiper-pagination-bullet-active {
         width: 48px;
         height: 48px;
-        background: rgba(229, 238, 255, 0.95);
+        background: rgba(229, 238, 255, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-color: rgba(229, 238, 255, 1);
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
         transform: translateY(-3px);
