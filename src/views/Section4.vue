@@ -205,6 +205,7 @@ useIntersection(sectionRef, () => {
 .section-4 {
   width: 100%;
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   background: rgba(37, 32, 126, 0.95);
   display: flex;
   align-items: flex-start;

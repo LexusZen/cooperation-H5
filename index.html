@@ -10,8 +10,9 @@
     <!-- 移动端适配脚本 -->
     <script>
       (function() {
+        const doc = document.documentElement;
+
         function setRem() {
-          const doc = document.documentElement;
           const clientWidth = doc.clientWidth;
 
           // 不同屏幕尺寸使用不同的基准
@@ -26,13 +27,30 @@
           }
         }
 
+        // 设置真实视口高度（修复移动端浏览器地址栏问题）
+        function setViewportHeight() {
+          // 获取真实的视口高度
+          const vh = window.innerHeight * 0.01;
+          // 设置CSS自定义属性
+          doc.style.setProperty('--vh', `${vh}px`);
+        }
+
         setRem();
-        window.addEventListener('resize', setRem);
-        window.addEventListener('orientationchange', setRem);
+        setViewportHeight();
+
+        window.addEventListener('resize', function() {
+          setRem();
+          setViewportHeight();
+        });
+        window.addEventListener('orientationchange', function() {
+          setRem();
+          setViewportHeight();
+        });
         // 页面显示时也执行一次
         window.addEventListener('pageshow', function(e) {
           if (e.persisted) {
             setRem();
+            setViewportHeight();
           }
         });
       })();

@@ -243,6 +243,7 @@ onMounted(() => {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   background: #000;
   overflow: hidden;
 }
@@ -517,6 +518,7 @@ onMounted(() => {
     flex-direction: column;
     justify-content: flex-start;
     min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 
     @media (max-width: 768px) {
       padding: 80px 20px 40px; // 移动端保持一致

@@ -284,6 +284,7 @@ const animateBars = (moduleIndex: number) => {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   color: white;
   padding: 80px 20px 60px;
   display: flex;

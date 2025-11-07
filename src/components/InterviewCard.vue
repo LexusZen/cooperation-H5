@@ -44,6 +44,7 @@ defineProps<{
 .interview-card {
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +57,8 @@ defineProps<{
   .canvas-container {
     width: 100%;
     max-width: 1200px;
-    height: calc(100vh - 110px); // 减去顶部10px + 底部导航90px + 额外10px
+    height: calc(100vh - 110px);
+    height: calc(var(--vh, 1vh) * 100 - 110px);
     max-height: 900px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -186,7 +188,8 @@ defineProps<{
     padding: 12px;
 
     .canvas-container {
-      height: calc(100vh - 116px); // 减去顶部12px + 底部导航95px + 额外9px
+      height: calc(100vh - 116px);
+      height: calc(var(--vh, 1vh) * 100 - 116px);
       border-radius: 18px;
     }
 
@@ -235,7 +238,8 @@ defineProps<{
     padding: 15px;
 
     .canvas-container {
-      height: calc(100vh - 130px); // 减去顶部15px + 底部导航100px + 额外15px
+      height: calc(100vh - 130px);
+      height: calc(var(--vh, 1vh) * 100 - 130px);
       border-radius: 20px;
     }
 
