@@ -229,6 +229,7 @@ const onSlideChange = (swiper: any) => {
     justify-content: center;
     align-items: center;
     padding: 20px 0;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
     background: rgba(37, 32, 126, 0.95);
     backdrop-filter: blur(15px);
     box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.4);
