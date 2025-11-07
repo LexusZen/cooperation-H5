@@ -49,7 +49,7 @@ defineProps<{
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: rgb(37, 32, 126);
+  background: rgba(37, 32, 126, 0.95);
   padding: 10px;
 
   // 画布容器

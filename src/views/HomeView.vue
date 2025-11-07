@@ -229,7 +229,7 @@ const onSlideChange = (swiper: any) => {
     justify-content: center;
     align-items: center;
     padding: 20px 0;
-    background: rgb(37, 32, 126);
+    background: rgba(37, 32, 126, 0.95);
     backdrop-filter: blur(15px);
     box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.4);
 
@@ -246,12 +246,12 @@ const onSlideChange = (swiper: any) => {
 
     &::before {
       left: 0;
-      background: linear-gradient(to right, rgb(37, 32, 126), transparent);
+      background: linear-gradient(to right, rgba(37, 32, 126, 0.95), transparent);
     }
 
     &::after {
       right: 0;
-      background: linear-gradient(to left, rgb(37, 32, 126), transparent);
+      background: linear-gradient(to left, rgba(37, 32, 126, 0.95), transparent);
     }
 
     .swiper-pagination-bullet {

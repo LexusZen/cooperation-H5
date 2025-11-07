@@ -258,7 +258,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(37, 32, 126);
+  background: rgba(37, 32, 126, 0.98);
   z-index: 10;
 
   .welcome-content {
@@ -332,7 +332,7 @@ onMounted(() => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(37, 32, 126, 0.6);
+      background: rgba(37, 32, 126, 0.3);
     }
 
     .panorama-title {
@@ -421,7 +421,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(37, 32, 126);
+  background: rgba(37, 32, 126, 0.98);
   z-index: 8;
 
   .cube-carousel-container {
@@ -504,7 +504,7 @@ onMounted(() => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(37, 32, 126, 0.7);
+      background: rgba(37, 32, 126, 0.4);
     }
   }
 

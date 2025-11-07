@@ -306,7 +306,7 @@ const animateBars = (moduleIndex: number) => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(37, 32, 126, 0.85);
+      background: rgba(37, 32, 126, 0.5);
     }
   }
 
