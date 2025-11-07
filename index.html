@@ -41,5 +41,13 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <!-- 图片加载错误监听 -->
+    <script>
+      window.addEventListener('error', function(e) {
+        if (e.target.tagName === 'IMG') {
+          console.error('图片加载失败:', e.target.src);
+        }
+      }, true);
+    </script>
   </body>
 </html>
