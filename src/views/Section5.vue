@@ -84,7 +84,7 @@ useIntersection(sectionRef, () => {
   .highlights-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 35px;
     padding: 0 10px;
     opacity: 1;
   }
@@ -94,14 +94,14 @@ useIntersection(sectionRef, () => {
     background: rgba(229, 238, 255, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    gap: 12px;
-    padding: 18px 15px;
+    gap: 15px;
+    padding: 28px 20px;
     transition: all 0.3s ease;
 
     &:hover {
@@ -113,20 +113,20 @@ useIntersection(sectionRef, () => {
     .text-section {
       flex: 1;
       display: flex;
-      gap: 10px;
+      gap: 14px;
       align-items: flex-start;
 
       .number-badge {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
         background: linear-gradient(135deg, rgb(22, 93, 255) 0%, rgb(99, 150, 255) 100%);
         color: white;
-        border-radius: 8px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
+        font-size: 22px;
         font-weight: bold;
         box-shadow: 0 3px 10px rgba(22, 93, 255, 0.3);
         flex-shrink: 0;
@@ -134,9 +134,9 @@ useIntersection(sectionRef, () => {
 
       .highlight-description {
         flex: 1;
-        font-size: 14px;
+        font-size: 16px;
         color: white;
-        line-height: 1.6; // 更紧凑的行高
+        line-height: 1.7;
         text-align: justify;
         margin: 0;
       }
@@ -149,9 +149,9 @@ useIntersection(sectionRef, () => {
       align-items: stretch;
 
       .image-wrapper {
-        width: 120px;
+        width: 140px;
         height: 100%;
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
@@ -284,36 +284,36 @@ useIntersection(sectionRef, () => {
     }
 
     .highlights-container {
-      gap: 16px;
+      gap: 30px;
       padding: 0 8px;
     }
 
     .highlight-card {
-      padding: 14px 12px;
-      gap: 10px;
-      border-radius: 10px;
+      padding: 24px 16px;
+      gap: 12px;
+      border-radius: 14px;
 
       .text-section {
-        gap: 8px;
+        gap: 12px;
 
         .number-badge {
-          width: 36px;
-          height: 36px;
-          min-width: 36px;
-          font-size: 16px;
-          border-radius: 6px;
+          width: 45px;
+          height: 45px;
+          min-width: 45px;
+          font-size: 20px;
+          border-radius: 8px;
         }
 
         .highlight-description {
-          font-size: 13px;
-          line-height: 1.55;
+          font-size: 15px;
+          line-height: 1.65;
         }
       }
 
       .image-section {
         .image-wrapper {
-          width: 100px;
-          border-radius: 6px;
+          width: 120px;
+          border-radius: 8px;
         }
       }
     }
@@ -322,36 +322,36 @@ useIntersection(sectionRef, () => {
   // 超小屏幕优化 (max-width: 480px)
   @media (max-width: 480px) {
     .highlights-container {
-      gap: 14px;
+      gap: 25px;
       padding: 0 5px;
     }
 
     .highlight-card {
-      padding: 12px 10px;
-      gap: 8px;
-      border-radius: 8px;
+      padding: 20px 14px;
+      gap: 10px;
+      border-radius: 12px;
 
       .text-section {
-        gap: 6px;
+        gap: 10px;
 
         .number-badge {
-          width: 32px;
-          height: 32px;
-          min-width: 32px;
-          font-size: 14px;
-          border-radius: 6px;
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+          font-size: 18px;
+          border-radius: 8px;
         }
 
         .highlight-description {
-          font-size: 12px;
-          line-height: 1.5;
+          font-size: 14px;
+          line-height: 1.6;
         }
       }
 
       .image-section {
         .image-wrapper {
-          width: 85px;
-          border-radius: 6px;
+          width: 110px;
+          border-radius: 8px;
         }
       }
     }

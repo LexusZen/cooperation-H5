@@ -65,7 +65,7 @@
         <div class="bg-image" :style="{ backgroundImage: `url(${getImageUrl('/images/section1/bg-main.jpg')})` }"></div>
 
         <div class="content">
-          <h2 class="section-title">深汕焕新 奋战百千万</h2>
+          <h2 class="section-title">山海新城，产业高地</h2>
 
           <!-- 小标题列表 -->
           <div class="highlights-section">
